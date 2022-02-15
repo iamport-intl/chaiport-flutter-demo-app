@@ -81,8 +81,8 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // chai.getOTP("+919913379694");
-                  chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
+                  chai.getOTP("+919913379694");
+                  // chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
                   // chai.getPaymentMethods(clientKey);
                   // chai.getSavedCards(
                   //     "", clientKey, "+919913379694", "");
