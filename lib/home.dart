@@ -22,10 +22,10 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     jwtToken =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoiYWlIS2FmS0lic2RVSkRPYiIsImlhdCI6MTY0NDgzOTg0NCwiZXhwIjoxNjQ0ODM5OTQ0fQ.yr_Xyn2FlGP4ErdVgW_aoULxw41f4Xa83pImr62AY-o";
-    signatureHash = "adrGAlY3FNnztTiP50OsddQIpudfWExzCyRmZlOVhlg=";
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoiYWlIS2FmS0lic2RVSkRPYiIsImlhdCI6MTY0NDkyMDA4NCwiZXhwIjoxNjQ0OTIwMTg0fQ.YJA1VvIvoOmL_H8V9yTUuaPP-HbYU54GDvQohgGwub8";
+    signatureHash = "T81P4CkAZGgOzpQw2YVZBlBG9H57kDttWLpQA/YDevE=";
     clientKey = "aiHKafKIbsdUJDOb";
-    orderId = "EmHjd54fD9";
+    orderId = "qGtO5dSamW";
 
     chai = ChaiPortImpl(context, "dev");
     orderDetails = WebCheckoutRequest(
@@ -45,8 +45,14 @@ class _HomeState extends State<Home> {
         1,
         "https://www.bing.com",
         false,
-        Merchant_details("Gumnam", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
-            "Gumnam420", 10000, 10000.00),
+        Merchant_details(
+            name: "Gumnam",
+            backUrl: null,
+            logo:
+                "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+            promoCode: null,
+            promoDiscount: 10000,
+            shippingCharges: 10000.00),
         orderId,
         <Order_details>[Order_details("knb", "kim nguyen bao", 50010, 1)],
         "chaipay://checkout",
@@ -81,8 +87,8 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  chai.getOTP("+919913379694");
-                  // chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
+                  // chai.getOTP("+919913379694");
+                  chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
                   // chai.getPaymentMethods(clientKey);
                   // chai.getSavedCards(
                   //     "", clientKey, "+919913379694", "");
