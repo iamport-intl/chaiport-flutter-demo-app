@@ -28,7 +28,7 @@ packages:
       path: "/Users/aagamshah/ChaiPay/chai_flutter/chaiport-flutter-sdk"
       relative: false
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   characters:
     dependency: transitive
     description:
