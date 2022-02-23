@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ChaiPortImpl chai = ChaiPortImpl(context, "dev");
   late StreamSubscription _intentData;
-  String? data;
+  String? paymentStatus;
 
   @override
   void initState() {
@@ -32,13 +32,13 @@ class _MyAppState extends State<MyApp> {
     getEnvironment();
     _intentData = ReceiveSharingIntent.getTextStream().listen((String value) {
       setState(() {
-        data = value;
+        paymentStatus = value;
         extractParams(value);
       });
     });
     ReceiveSharingIntent.getInitialText().then((String? value) {
       setState(() {
-        data = value;
+        paymentStatus = value;
         extractParams(value!);
       });
     });
