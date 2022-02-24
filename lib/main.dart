@@ -16,8 +16,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final environmnet = "sandbox";
-  late ChaiPortImpl chai = ChaiPortImpl(context, environmnet);
+  final environment = "sandbox";
+  late ChaiPortImpl chai = ChaiPortImpl(context, environment);
   late StreamSubscription _intentData;
   String? paymentStatus;
 
@@ -31,16 +31,7 @@ class _MyAppState extends State<MyApp> {
     });
     _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
       setState(() {
-        chai.processPaymentStatus(url, environmnet);
-      });
-    });
-    ReceiveSharingIntent.getInitialText().then((String? url) {
-      setState(() {
-        if (url != null) {
-          chai.processPaymentStatus(url, environmnet);
-        } else {
-          throw ("Received payment status url is null ");
-        }
+        chai.processPaymentStatus(url, environment);
       });
     });
   }
