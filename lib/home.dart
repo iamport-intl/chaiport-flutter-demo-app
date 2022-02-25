@@ -1,3 +1,5 @@
+import 'package:chai_flutter_demo_app/utils/jwt_token_generation.dart';
+import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
 import 'package:chaipay_flutter_package/dto/requestes/web_checkout_request.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late ChaiPortImpl chai;
+  SignatureHash hash = SignatureHash();
+  JwtTokenGeneration jwt = JwtTokenGeneration();
   late WebCheckoutRequest orderDetails;
 
   late String signatureHash;
@@ -25,7 +29,7 @@ class _HomeState extends State<Home> {
         "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoiYWlIS2FmS0lic2RVSkRPYiIsImlhdCI6MTY0NTYyMTgxNiwiZXhwIjoxNjQ1NjIxOTE2fQ.xp18wg3zbblIfc3w0v-6Ar3c-JNnz58TMhELMjmJWSU";
     signatureHash = "cDoWMhvGpYQTM8xzw5Z7h5txsZID4slnB1UHdeM7WCc=";
     clientKey = "aiHKafKIbsdUJDOb";
-    orderId = "5j9peJ349Z";
+    orderId = "hdTqTsAZAp";
 
     chai = ChaiPortImpl(context, "sandbox");
     orderDetails = WebCheckoutRequest(
@@ -88,7 +92,10 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP("+919913379694");
-                  chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
+                  // chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
+                  // hash.getSignatureHash("50010", "VND", "https://www.bing.com",
+                  //     orderId, clientKey, "https://www.google.com");
+                  jwt.getJWTToken();
                   // chai.getPaymentMethods(clientKey);
                   // chai.getSavedCards(
                   //     "", clientKey, "+919913379694", "");
