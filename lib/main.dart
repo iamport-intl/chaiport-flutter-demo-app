@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       print('CHAI_PaymentStatus-> $paymentStatus');
+      navigateHome(paymentStatus);
     });
     _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
       setState(() {
@@ -47,5 +48,10 @@ class _MyAppState extends State<MyApp> {
     return const MaterialApp(
       home: Home(),
     );
+  }
+
+  void navigateHome(Map paymentStatus) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const Home()));
   }
 }
