@@ -59,13 +59,13 @@ class _MyAppState extends State<MyApp> {
       print("initialLink--> $initialLink");
       _sub = linkStream.listen((String? link) {
         print("deeplink--> $link");
+        if (link != null) {
+          chai.processPaymentStatus(link, environment);
+        }
         // Parse the link and warn the user, if it is not correct
       }, onError: (err) {
-        // Handle exception by warning the user their action did not succeed
+        print(err);
       });
-
-      // Parse the link and warn the user, if it is not correct,
-      // but keep in mind it could be `null`.
     } on PlatformException {
       // Handle exception by warning the user their action did not succeed
       // return?
