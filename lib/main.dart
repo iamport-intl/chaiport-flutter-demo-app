@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:chai_flutter_demo_app/home.dart';
 import 'package:flutter/material.dart';
-import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 void main() {
   runApp(const MyApp());
@@ -20,20 +21,16 @@ class _MyAppState extends State<MyApp> {
   late ChaiPortImpl chai = ChaiPortImpl(context, environment);
   late StreamSubscription _intentData;
   String? paymentStatus;
+  late StreamSubscription _sub;
 
   @override
   void initState() {
     super.initState();
-
+    initUniLinks();
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       print('CHAI_PaymentStatus-> $paymentStatus');
       navigateHome(paymentStatus);
-    });
-    _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
-      setState(() {
-        chai.processPaymentStatus(url, environment);
-      });
     });
   }
 
@@ -53,5 +50,25 @@ class _MyAppState extends State<MyApp> {
   void navigateHome(Map paymentStatus) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Home()));
+  }
+
+  Future<void> initUniLinks() async {
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      final initialLink = await getInitialLink();
+      print("initialLink--> $initialLink");
+      _sub = linkStream.listen((String? link) {
+        print("deeplink--> $link");
+        // Parse the link and warn the user, if it is not correct
+      }, onError: (err) {
+        // Handle exception by warning the user their action did not succeed
+      });
+
+      // Parse the link and warn the user, if it is not correct,
+      // but keep in mind it could be `null`.
+    } on PlatformException {
+      // Handle exception by warning the user their action did not succeed
+      // return?
+    }
   }
 }

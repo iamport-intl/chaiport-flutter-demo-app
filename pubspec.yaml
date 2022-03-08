@@ -32,7 +32,6 @@ dependencies:
   chaipay_flutter_package:
     path: /Users/aagamshah/ChaiPay/chai_flutter/chaiport-flutter-sdk
   url_launcher: ^6.0.18
-  receive_sharing_intent: ^1.4.5
   shared_preferences: ^2.0.13
   jaguar_jwt: ^3.0.0
 
@@ -40,6 +39,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   crypto: ^3.0.1
+  uni_links: ^0.5.1
 
 dev_dependencies:
   flutter_test:
