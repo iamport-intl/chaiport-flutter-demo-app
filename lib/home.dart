@@ -27,6 +27,24 @@ class _HomeState extends State<Home> {
       print('CHAI_PaymentStatus-> $paymentStatus');
       navigateToResult(paymentStatus);
     });
+    chai.setOtpListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
+    chai.setPaymentMethodsListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
+    chai.setSavedCardsListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
+    chai.setCheckoutWithTokenizationListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
+    chai.setCheckoutWithoutTokenizationListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
+    chai.setTokenCallBackListener(callback: (dynamic response) {
+      print('CHAI_Response-> $response');
+    });
     _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
       setState(() {
         chai.processPaymentStatus(url, requests.environment);
