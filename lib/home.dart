@@ -22,12 +22,12 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     jwtToken =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoiYWlIS2FmS0lic2RVSkRPYiIsImlhdCI6MTY0NTYyMTgxNiwiZXhwIjoxNjQ1NjIxOTE2fQ.xp18wg3zbblIfc3w0v-6Ar3c-JNnz58TMhELMjmJWSU";
-    signatureHash = "cDoWMhvGpYQTM8xzw5Z7h5txsZID4slnB1UHdeM7WCc=";
-    clientKey = "aiHKafKIbsdUJDOb";
-    orderId = "5j9peJ349Z";
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoieEZnc2Vvamlwck9oa2dQYSIsImlhdCI6MTY0NjkyNDI5OCwiZXhwIjoxNjQ2OTI0Mzk4fQ.Obsjusb5-_iS1VLO5XbldMdWtwRPYbB_vfTyM-UgzKo";
+    signatureHash = "sQQAu5/67DlAxPYM4/ghO9Ys/5LxJfWNyEy3BY/DtqA=";
+    clientKey = "xFgseojiprOhkgPa";
+    orderId = "VDfbxuM01T";
 
-    chai = ChaiPortImpl(context, "sandbox");
+    chai = ChaiPortImpl(context, "sandbox", "staging");
     orderDetails = WebCheckoutRequest(
         50010,
         Billing_details(
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
         false,
         Merchant_details(
             name: "Gumnam",
-            backUrl: null,
+            backUrl: "https://demo.chaipay.io/checkout.html",
             logo:
                 "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
             promoCode: null,
