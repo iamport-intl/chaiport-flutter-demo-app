@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final environment = "sandbox";
-  late ChaiPortImpl chai = ChaiPortImpl(context, environment);
+  late ChaiPortImpl chai = ChaiPortImpl(context, environment, false, "staging");
   late StreamSubscription _intentData;
   String? paymentStatus;
 

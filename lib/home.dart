@@ -22,12 +22,15 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     jwtToken =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoieEZnc2Vvamlwck9oa2dQYSIsImlhdCI6MTY0NjkyNDI5OCwiZXhwIjoxNjQ2OTI0Mzk4fQ.Obsjusb5-_iS1VLO5XbldMdWtwRPYbB_vfTyM-UgzKo";
-    signatureHash = "sQQAu5/67DlAxPYM4/ghO9Ys/5LxJfWNyEy3BY/DtqA=";
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoieEZnc2Vvamlwck9oa2dQYSIsImlhdCI6MTY0Njk4MTYxNSwiZXhwIjoxNjQ2OTgxNzE1fQ.sl1XZNxc9u6_njjdC2QkhYz7O62xKs9j0tWKQ3S0T6s";
+    signatureHash = "NBgbV41uIrXRs3jdawhA4HjA/aJO/WhUsiZ02Q+L1M4=";
     clientKey = "xFgseojiprOhkgPa";
-    orderId = "VDfbxuM01T";
+    orderId = "kJxb1K0tXA";
 
-    chai = ChaiPortImpl(context, "sandbox", "staging");
+    chai = ChaiPortImpl(context, "sandbox", false, "staging");
+    chai.setPaymentLinkListener(callback: (String paymentLink) {
+      print('CHAI_PaymentStatus-> $paymentLink');
+    });
     orderDetails = WebCheckoutRequest(
         50010,
         Billing_details(
@@ -41,7 +44,7 @@ class _HomeState extends State<Home> {
         "VND",
         false,
         "By Aagam",
-        "dev",
+        "staging",
         1,
         "https://www.bing.com",
         false,
