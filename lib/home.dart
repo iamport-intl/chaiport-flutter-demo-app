@@ -2,6 +2,9 @@ import 'dart:async';
 import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -27,13 +30,13 @@ class _HomeState extends State<Home> {
       print('CHAI_PaymentStatus-> $paymentStatus');
       navigateToResult(paymentStatus);
     });
-    chai.setOtpListener(callback: (dynamic response) {
+    chai.setOtpListener(callback: (GetOtpResponse response) {
       print('CHAI_Response-> $response');
     });
-    chai.setPaymentMethodsListener(callback: (dynamic response) {
+    chai.setPaymentMethodsListener(callback: (PaymentMethodResponse response) {
       print('CHAI_Response-> $response');
     });
-    chai.setSavedCardsListener(callback: (dynamic response) {
+    chai.setSavedCardsListener(callback: (CreditCardDetailsResponse response) {
       print('CHAI_Response-> $response');
     });
     chai.setCheckoutWithTokenizationListener(callback: (dynamic response) {
@@ -76,10 +79,10 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  chai.checkoutUsingWeb(requests.getJWTToken(),
-                      requests.clientKey, requests.getRequestBody());
+                  // chai.checkoutUsingWeb(requests.getJWTToken(),
+                  //     requests.clientKey, requests.getRequestBody());
                   // chai.getPaymentMethods(requests.clientKey);
-                  // chai.getSavedCards("", requests.clientKey, requests.mobileNo, "");
+                  chai.getSavedCards("", requests.clientKey, requests.mobileNo, "670517");
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),

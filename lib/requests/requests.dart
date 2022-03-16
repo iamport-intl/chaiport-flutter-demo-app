@@ -15,7 +15,7 @@ class Requests {
 
   String clientKey = CLIENT_KEY;
   String mobileNo = "+919913379694";
-  final environment = "sandbox";
+  final environment = "live";
 
   String getJWTToken() {
     return jwtToken = "Bearer " + jwt.getJWTToken();
