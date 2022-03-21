@@ -1,10 +1,8 @@
 import 'dart:convert' show Utf8Encoder, base64Encode;
+import 'package:chai_flutter_demo_app/constants/constants.dart';
 import 'package:crypto/crypto.dart';
 
 class SignatureHash {
-  String message = "";
-  String SECRET_KEY_Dev3 =
-      "2601efeb4409f7027da9cbe856c9b6b8b25f0de2908bc5322b1b352d0b7eb2f5";
 
   String getSignatureHash(String amount, String currency, String failureUrl,
       String orderId, String clientKey, String successUrl) {
@@ -16,6 +14,7 @@ class SignatureHash {
       "merchant_order_id": orderId,
       "success_url": successUrl
     };
+    String message = "";
     params.forEach((key, value) {
       var encodedValue = Uri.encodeComponent(value);
       if (message.isNotEmpty) {
@@ -25,7 +24,7 @@ class SignatureHash {
       }
     });
 
-    final keyBytes = const Utf8Encoder().convert(SECRET_KEY_Dev3);
+    final keyBytes = const Utf8Encoder().convert(SECRET_KEY);
     final dataBytes = const Utf8Encoder().convert(message);
     final hmacBytes = Hmac(sha256, keyBytes).convert(dataBytes).bytes;
     final hmacBase64 = base64Encode(hmacBytes);

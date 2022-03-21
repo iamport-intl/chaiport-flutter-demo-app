@@ -11,21 +11,18 @@ class Requests {
   JwtTokenGeneration jwt = JwtTokenGeneration();
   RandomStringsGeneration randomString = RandomStringsGeneration();
 
-  late String signatureHash;
-  late String jwtToken;
-  late String orderId;
-
   String clientKey = CLIENT_KEY;
+  String secretKey = SECRET_KEY;
   String mobileNo = "+919913379694";
   final environment = "live";
 
   String getJWTToken() {
-    return jwtToken = "Bearer " + jwt.getJWTToken();
+    return "Bearer " + jwt.getJWTToken();
   }
 
   WebCheckoutRequest getRequestBody() {
-    orderId = randomString.getRandomString(6);
-    signatureHash = hash.getSignatureHash("50010", "VND",
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash("50010", "VND",
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
         50010,
@@ -71,8 +68,8 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
-    orderId = randomString.getRandomString(6);
-    signatureHash = hash.getSignatureHash("50010", "VND",
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash("50010", "VND",
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WithTokenizationRequest tokenizationRequest = WithTokenizationRequest(
         amount: 50010,
@@ -93,13 +90,14 @@ class Requests {
         pmtMethod: "BAOKIM_ATM_CARD",
         redirectUrl: "chaipay://checkout",
         signatureHash: signatureHash,
-        successUrl: "https://www.google.com");
+        successUrl: "https://www.google.com",
+        environment: "live");
     return tokenizationRequest;
   }
 
   WithoutTokenizationRequest getWithoutTokenizationRequest() {
-    orderId = randomString.getRandomString(6);
-    signatureHash = hash.getSignatureHash("50010", "VND",
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash("50010", "VND",
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WithoutTokenizationRequest tokenizationRequest = WithoutTokenizationRequest(
         amount: 50010,
@@ -124,8 +122,8 @@ class Requests {
           OrderDetails(
               id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
         ],
-        pmtChannel: "BAOKIM",
-        pmtMethod: "BAOKIM_ATM_CARD",
+        pmtChannel: "MOMOPAY",
+        pmtMethod: "MOMOPAY_WALLET",
         redirectUrl: "chaipay://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: BillingAddress(
@@ -140,7 +138,8 @@ class Requests {
             shippingName: "Test mark",
             shippingPhone: "9998878788"),
         signatureHash: signatureHash,
-        successUrl: "https://www.google.com");
+        successUrl: "https://www.google.com",
+        environment: "live");
     return tokenizationRequest;
   }
 }
