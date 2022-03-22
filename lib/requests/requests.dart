@@ -2,6 +2,7 @@ import 'package:chai_flutter_demo_app/constants/constants.dart';
 import 'package:chai_flutter_demo_app/utils/jwt_token_generation.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
+import 'package:chaipay_flutter_package/dto/requests/chanex_token_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/web_checkout_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
@@ -69,25 +70,51 @@ class Requests {
 
   WithTokenizationRequest getTokenizationRequest() {
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", "VND",
+    String signatureHash = hash.getSignatureHash("50010", "THB",
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WithTokenizationRequest tokenizationRequest = WithTokenizationRequest(
         amount: 50010,
-        billingDetails:
-            BillingDetailsTokenization(billingPhone: "+919913379694"),
+        billingDetails: BillingDetailsTokenization(
+            billingAddress: BillingAddressTokenization(
+                city: "TH",
+                countryCode: "TH",
+                locale: "en",
+                line1: "address",
+                line2: "address_2",
+                postalCode: "400202",
+                state: "Mah"),
+            billingEmail: "markweins@gmail.com",
+            billingName: "Test mark",
+            billingPhone: "9998878788"),
+        shippingDetails: ShippingDetailsTokenization(
+            shippingAddress: BillingAddressTokenization(
+                city: "TH",
+                countryCode: "TH",
+                locale: "en",
+                line1: "address",
+                line2: "address_2",
+                postalCode: "400202",
+                state: "Mah"),
+            shippingEmail: "markweins@gmail.com",
+            shippingName: "Test mark",
+            shippingPhone: "9998878788"),
         tokenParams: TokenParams(
-            expiryMonth: "05",
-            expiryYear: "2021",
-            saveCard: false,
-            partialCardNumber: "222300******0023",
-            token: "f842b1675abb4311a70bb0b9720dd371",
-            type: "mastercard"),
+            expiryMonth: "04",
+            expiryYear: "2025",
+            saveCard: true,
+            partialCardNumber: "4111 1******1111",
+            token: "09d14c38ac8e4b93ae0005655f4901f1",
+            type: "visa"),
         currency: "VND",
         failureUrl: "https://www.bing.com",
         key: clientKey,
         merchantOrderId: orderId,
-        pmtChannel: "BAOKIM",
-        pmtMethod: "BAOKIM_ATM_CARD",
+        orderDetails: [
+          OrderDetailsTokenization(
+              id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
+        ],
+        pmtChannel: "OMISE",
+        pmtMethod: "OMISE_CREDIT_CARD",
         redirectUrl: "chaipay://checkout",
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
@@ -122,8 +149,8 @@ class Requests {
           OrderDetails(
               id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
         ],
-        pmtChannel: "MOMOPAY",
-        pmtMethod: "MOMOPAY_WALLET",
+        pmtChannel: "VNPAY",
+        pmtMethod: "VNPAY_ALL",
         redirectUrl: "chaipay://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: BillingAddress(
@@ -141,5 +168,44 @@ class Requests {
         successUrl: "https://www.google.com",
         environment: "live");
     return tokenizationRequest;
+  }
+
+  ChanexTokenRequest getChanexTokenRequest() {
+    ChanexTokenRequest chanexTokenRequest =
+        ChanexTokenRequest(card: adayenCard());
+    return chanexTokenRequest;
+  }
+
+  Card adayenCard() {
+    Card card = Card(
+        cardholderName: "NGUYEN VAN A",
+        cardType: "Visa",
+        cardNumber: "4111111145551142",
+        expirationMonth: "03",
+        expirationYear: "2030",
+        serviceCode: "737");
+    return card;
+  }
+
+  Card omiseCreditCard() {
+    Card card = Card(
+        cardNumber: "4000000000000002",
+        cardType: "Visa",
+        cardholderName: "NGUYEN VAN A",
+        serviceCode: "737",
+        expirationYear: "2022",
+        expirationMonth: "11");
+    return card;
+  }
+
+  Card vtcPayCreditCard() {
+    Card card = Card(
+        cardNumber: "4111111111111111",
+        cardType: "Visa",
+        cardholderName: "NGUYEN VAN A",
+        serviceCode: "123",
+        expirationYear: "2030",
+        expirationMonth: "01");
+    return card;
   }
 }

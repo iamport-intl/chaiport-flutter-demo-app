@@ -3,6 +3,7 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
     chai.setCheckoutWithoutTokenizationListener(callback: (WithoutTokenizationResponse response) {
       print('CHAI_Response-> $response');
     });
-    chai.setTokenCallBackListener(callback: (dynamic response) {
+    chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
       print('CHAI_Response-> $response');
     });
     _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
@@ -87,10 +88,11 @@ class _HomeState extends State<Home> {
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "670517");
-                  chai.checkoutWithTokenization(
-                      requests.getTokenizationRequest());
+                  // chai.checkoutWithTokenization(
+                  //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest());
+                  chai.getToken(requests.getChanexTokenRequest());
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
