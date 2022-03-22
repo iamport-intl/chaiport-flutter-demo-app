@@ -22,8 +22,9 @@ class Requests {
   }
 
   WebCheckoutRequest getRequestBody() {
+    const currency = "THB";
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", "VND",
+    String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
         50010,
@@ -35,7 +36,7 @@ class Requests {
             billingPhone: "+848959893980"),
         clientKey,
         "VN",
-        "VND",
+        currency,
         false,
         "By Aagam",
         "dev",
@@ -69,8 +70,9 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
+    const currency = "THB";
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", "THB",
+    String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WithTokenizationRequest tokenizationRequest = WithTokenizationRequest(
         amount: 50010,
@@ -105,7 +107,7 @@ class Requests {
             partialCardNumber: "4111 1******1111",
             token: "09d14c38ac8e4b93ae0005655f4901f1",
             type: "visa"),
-        currency: "VND",
+        currency: currency,
         failureUrl: "https://www.bing.com",
         key: clientKey,
         merchantOrderId: orderId,
