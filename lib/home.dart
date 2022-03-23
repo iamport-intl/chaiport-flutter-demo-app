@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
@@ -7,6 +8,7 @@ import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/without_tokenization_response.dart';
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
@@ -31,26 +33,34 @@ class _HomeState extends State<Home> {
     chai = ChaiPortImpl(context, requests.environment);
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
-      print('CHAI_PaymentStatus-> $paymentStatus');
+      final json = jsonEncode(paymentStatus);
+      print('CHAI_PaymentStatus-> $json');
       navigateToResult(paymentStatus);
     });
     chai.setOtpListener(callback: (GetOtpResponse response) {
-      print('CHAI_Response-> $response');
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
     chai.setPaymentMethodsListener(callback: (PaymentMethodResponse response) {
-      print('CHAI_Response-> $response');
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
     chai.setSavedCardsListener(callback: (CreditCardDetailsResponse response) {
-      print('CHAI_Response-> $response');
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
-    chai.setCheckoutWithTokenizationListener(callback: (dynamic response) {
-      print('CHAI_Response-> $response');
+    chai.setCheckoutWithTokenizationListener(callback: (WithTokenizationResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
-    chai.setCheckoutWithoutTokenizationListener(callback: (WithoutTokenizationResponse response) {
-      print('CHAI_Response-> $response');
+    chai.setCheckoutWithoutTokenizationListener(
+        callback: (WithoutTokenizationResponse response) {
+          final json = jsonEncode(response);
+          print('CHAI_Response-> $response--> $json');
     });
     chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
-      print('CHAI_Response-> $response');
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
     _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
       setState(() {
@@ -87,12 +97,13 @@ class _HomeState extends State<Home> {
                   //     requests.clientKey, requests.getRequestBody());
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
-                  //     "", requests.clientKey, requests.mobileNo, "670517");
+                  //     "", requests.clientKey, requests.mobileNo, "217910");
                   chai.checkoutWithTokenization(
                       requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest());
-                  // chai.getToken(requests.getChanexTokenRequest());
+                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
+                  //     requests.getChanexTokenRequest());
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
