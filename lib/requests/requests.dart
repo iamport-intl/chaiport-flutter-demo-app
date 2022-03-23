@@ -22,7 +22,7 @@ class Requests {
   }
 
   WebCheckoutRequest getRequestBody() {
-    const currency = "THB";
+    const currency = VND;
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
@@ -70,7 +70,7 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
-    const currency = "THB";
+    const currency = THB;
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
