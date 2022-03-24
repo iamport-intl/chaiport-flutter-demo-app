@@ -185,7 +185,8 @@ class Requests {
         cardNumber: "4111111145551142",
         expirationMonth: "03",
         expirationYear: "2030",
-        serviceCode: "737");
+        serviceCode: "737",
+        saveCard: true);
     return card;
   }
 
@@ -196,7 +197,8 @@ class Requests {
         cardholderName: "NGUYEN VAN A",
         serviceCode: "737",
         expirationYear: "2022",
-        expirationMonth: "11");
+        expirationMonth: "11",
+        saveCard: true);
     return card;
   }
 
@@ -207,7 +209,8 @@ class Requests {
         cardholderName: "NGUYEN VAN A",
         serviceCode: "123",
         expirationYear: "2030",
-        expirationMonth: "01");
+        expirationMonth: "01",
+        saveCard: true);
     return card;
   }
 }

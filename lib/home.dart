@@ -93,13 +93,13 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  // chai.checkoutUsingWeb(requests.getJWTToken(),
-                  //     requests.clientKey, requests.getRequestBody());
+                  chai.checkoutUsingWeb(requests.getJWTToken(),
+                      requests.clientKey, requests.getRequestBody());
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
-                  chai.checkoutWithTokenization(
-                      requests.getTokenizationRequest());
+                  // chai.checkoutWithTokenization(
+                  //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
