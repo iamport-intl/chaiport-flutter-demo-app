@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
-import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
 import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
