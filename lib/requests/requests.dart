@@ -8,21 +8,23 @@ import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.d
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
 
 class Requests {
+  final clientKey = CLIENT_KEY;
+  final secretKey = SECRET_KEY;
+  final mobileNo = "+919913379694";
+  final environment = "live";
+  final currency = VND;
+
+
+
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
   RandomStringsGeneration randomString = RandomStringsGeneration();
-
-  String clientKey = CLIENT_KEY;
-  String secretKey = SECRET_KEY;
-  String mobileNo = "+919913379694";
-  final environment = "live";
 
   String getJWTToken() {
     return "Bearer " + jwt.getJWTToken();
   }
 
   WebCheckoutRequest getRequestBody() {
-    const currency = VND;
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
@@ -70,7 +72,6 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
-    const currency = THB;
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
@@ -142,7 +143,7 @@ class Requests {
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
             billingPhone: "9998878788"),
-        currency: "VND",
+        currency: currency,
         env: "dev",
         failureUrl: "https://www.bing.com",
         key: clientKey,

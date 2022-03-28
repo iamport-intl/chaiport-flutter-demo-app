@@ -4,6 +4,7 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/constants/constants.dart';
 import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    chai = ChaiPortImpl(context, requests.environment);
+    chai = ChaiPortImpl(context, requests.environment,DEV);
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       final json = jsonEncode(paymentStatus);
@@ -93,15 +94,15 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  chai.checkoutUsingWeb(requests.getJWTToken(),
-                      requests.clientKey, requests.getRequestBody());
+                  // chai.checkoutUsingWeb(requests.getJWTToken(),
+                  //     requests.clientKey, requests.getRequestBody());
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
                   // chai.checkoutWithTokenization(
                   //     requests.getTokenizationRequest());
-                  // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest());
+                  chai.checkoutWithoutTokenization(
+                      requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
                   //     requests.getChanexTokenRequest());
                 },
