@@ -23,7 +23,7 @@ class _ResultState extends State<Result> {
             children: [
               Text(
                 widget.paymentStatus.toString(),
-                style: const TextStyle(fontSize: 35),
+                style: const TextStyle(fontSize: 20),
               ),
             ],
           ),

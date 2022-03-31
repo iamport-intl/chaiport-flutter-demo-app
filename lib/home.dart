@@ -1,6 +1,18 @@
-import 'package:chaipay_flutter_package/chaiport_classes/chaiport_impl.dart';
-import 'package:chaipay_flutter_package/dto/requestes/web_checkout_request.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:chai_flutter_demo_app/requests/requests.dart';
+import 'package:chai_flutter_demo_app/result.dart';
+import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
+import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/constants/constants.dart';
+import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/without_tokenization_response.dart';
 import 'package:flutter/material.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,66 +23,58 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late ChaiPortImpl chai;
-  late WebCheckoutRequest orderDetails;
-
-  late String signatureHash;
-  late String jwtToken;
-  late String orderId;
-  late String clientKey;
+  Requests requests = Requests();
+  late StreamSubscription _intentData;
+  SignatureHash hash = SignatureHash();
 
   @override
   void initState() {
     super.initState();
-    jwtToken =
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDSEFJUEFZIiwic3ViIjoieEZnc2Vvamlwck9oa2dQYSIsImlhdCI6MTY0Njk4MTYxNSwiZXhwIjoxNjQ2OTgxNzE1fQ.sl1XZNxc9u6_njjdC2QkhYz7O62xKs9j0tWKQ3S0T6s";
-    signatureHash = "NBgbV41uIrXRs3jdawhA4HjA/aJO/WhUsiZ02Q+L1M4=";
-    clientKey = "xFgseojiprOhkgPa";
-    orderId = "kJxb1K0tXA";
 
-    chai = ChaiPortImpl(context, "sandbox", false, "staging");
-    chai.setPaymentLinkListener(callback: (String paymentLink) {
-      print('CHAI_PaymentStatus-> $paymentLink');
+    chai = ChaiPortImpl(context, requests.environment, DEV);
+    chai.setPaymentStatusListener(
+        callback: (Map<String, dynamic> paymentStatus) {
+      final json = jsonEncode(paymentStatus);
+      print('CHAI_PaymentStatus-> $json');
+      navigateToResult(paymentStatus);
     });
-    orderDetails = WebCheckoutRequest(
-        50010,
-        Billing_details(
-            billingAddress: Billing_address(
-                "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
-            billingEmail: "markweins@gmail.com",
-            billingName: "Test mark",
-            billingPhone: "+848959893980"),
-        clientKey,
-        "VN",
-        "VND",
-        false,
-        "By Aagam",
-        "staging",
-        1,
-        "https://www.bing.com",
-        false,
-        Merchant_details(
-            name: "Gumnam",
-            backUrl: "https://demo.chaipay.io/checkout.html",
-            logo:
-                "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
-            promoCode: null,
-            promoDiscount: 10000,
-            shippingCharges: 10000.00),
-        orderId,
-        <Order_details>[Order_details("knb", "kim nguyen bao", 50010, 1)],
-        "chaipay://checkout",
-        Shipping_details(
-            shippingAddress: Shipping_address(
-                "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
-            shippingEmail: "markweins@gmail.com",
-            shippingName: "Test mark",
-            shippingPhone: "+848959893980"),
-        true,
-        true,
-        signatureHash,
-        "api",
-        "https://www.google.com",
-        "live");
+    chai.setOtpListener(callback: (GetOtpResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    chai.setPaymentMethodsListener(callback: (PaymentMethodResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    chai.setSavedCardsListener(callback: (CreditCardDetailsResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    chai.setCheckoutWithTokenizationListener(
+        callback: (WithTokenizationResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    chai.setCheckoutWithoutTokenizationListener(
+        callback: (WithoutTokenizationResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
+    });
+    _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
+      setState(() {
+        chai.processPaymentStatus(url, requests.environment);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _intentData.cancel();
+    super.dispose();
   }
 
   @override
@@ -90,11 +94,18 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // chai.getOTP("+919913379694");
-                  chai.checkoutUsingWeb(jwtToken, clientKey, orderDetails);
-                  // chai.getPaymentMethods(clientKey);
+                  // chai.getOTP(requests.mobileNo);
+                  // chai.checkoutUsingWeb(requests.getJWTToken(),
+                  //     requests.clientKey, requests.getRequestBody());
+                  // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
-                  //     "", clientKey, "+919913379694", "");
+                  //     "", requests.clientKey, requests.mobileNo, "217910");
+                  // chai.checkoutWithTokenization(
+                  //     requests.getTokenizationRequest());
+                  chai.checkoutWithoutTokenization(
+                      requests.getWithoutTokenizationRequest());
+                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
+                  //     requests.getChanexTokenRequest());
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
@@ -107,5 +118,17 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  void navigateToResult(Map paymentStatus) {
+    try {
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Result(paymentStatus: paymentStatus)));
+    } catch (exception) {
+      print(exception.toString());
+    }
   }
 }
