@@ -43,13 +43,13 @@ class Requests {
         currency,
         false,
         "By Aagam",
-        "dev",
+        devEnvironment,
         1,
         "https://www.bing.com",
         false,
         Merchant_details(
             name: "Gumnam",
-            backUrl: null,
+            backUrl: "https://demo.chaipay.io/checkout.html",
             logo:
                 "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
             promoCode: null,
