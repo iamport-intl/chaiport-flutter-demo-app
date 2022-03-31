@@ -3,9 +3,9 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
 
 class JwtTokenGeneration {
-  Requests requests = Requests();
-
   String getJWTToken() {
+    Requests requests = Requests();
+
     final claimSet = JwtClaim(
         issuedAt: DateTime.now(),
         expiry: DateTime.now().add(const Duration(seconds: 100)),
@@ -17,7 +17,7 @@ class JwtTokenGeneration {
         });
 
     String token = issueJwtHS256(claimSet, requests.secretKey);
-    print(token);
+    print("JWTToken--> $token");
 
     return token;
   }
