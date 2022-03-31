@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    chai = ChaiPortImpl(context, requests.environment,DEV);
+    chai = ChaiPortImpl(context, requests.environment, DEV);
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       final json = jsonEncode(paymentStatus);
@@ -50,14 +50,15 @@ class _HomeState extends State<Home> {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setCheckoutWithTokenizationListener(callback: (WithTokenizationResponse response) {
+    chai.setCheckoutWithTokenizationListener(
+        callback: (WithTokenizationResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
     chai.setCheckoutWithoutTokenizationListener(
         callback: (WithoutTokenizationResponse response) {
-          final json = jsonEncode(response);
-          print('CHAI_Response-> $response--> $json');
+      final json = jsonEncode(response);
+      print('CHAI_Response-> $response--> $json');
     });
     chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
       final json = jsonEncode(response);
