@@ -2,16 +2,18 @@ import 'package:chai_flutter_demo_app/constants/constants.dart';
 import 'package:chai_flutter_demo_app/utils/jwt_token_generation.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
+import 'package:chaipay_flutter_package/constants/constants.dart';
 import 'package:chaipay_flutter_package/dto/requests/chanex_token_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/web_checkout_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
 
 class Requests {
-  final clientKey = CLIENT_KEY;
-  final secretKey = SECRET_KEY;
+  final devEnvironment = STAGING;
+  final clientKey = CLIENT_KEY_Staging1;
+  final secretKey = SECRET_KEY_Staging1;
   final mobileNo = "+919913379694";
-  final environment = "live";
+  final environment = LIVE;
   final currency = VND;
 
 
