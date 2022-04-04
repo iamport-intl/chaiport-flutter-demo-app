@@ -74,6 +74,8 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
+    const paymentChannel = "VTCPAY";
+    const paymentMethod = "VTCPAY_CREDIT_CARD";
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
@@ -118,8 +120,8 @@ class Requests {
           OrderDetailsTokenization(
               id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
         ],
-        pmtChannel: "OMISE",
-        pmtMethod: "OMISE_CREDIT_CARD",
+        pmtChannel: paymentChannel,
+        pmtMethod: paymentMethod,
         redirectUrl: "chaipay://checkout",
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
@@ -128,8 +130,10 @@ class Requests {
   }
 
   WithoutTokenizationRequest getWithoutTokenizationRequest() {
+    const paymentChannel = "VNPAY";
+    const paymentMethod = "VNPAY_ALL";
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", "VND",
+    String signatureHash = hash.getSignatureHash("50010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WithoutTokenizationRequest tokenizationRequest = WithoutTokenizationRequest(
         amount: 50010,
@@ -154,8 +158,8 @@ class Requests {
           OrderDetails(
               id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
         ],
-        pmtChannel: "VNPAY",
-        pmtMethod: "VNPAY_ALL",
+        pmtChannel: paymentChannel,
+        pmtMethod: paymentMethod,
         redirectUrl: "chaipay://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: BillingAddress(
@@ -177,7 +181,7 @@ class Requests {
 
   ChanexTokenRequest getChanexTokenRequest() {
     ChanexTokenRequest chanexTokenRequest =
-        ChanexTokenRequest(card: adayenCard());
+        ChanexTokenRequest(card: vtcPayCreditCard());
     return chanexTokenRequest;
   }
 
