@@ -41,6 +41,12 @@ const CLIENT_KEY_Staging3 = "KUeDXeTRnbQhlQXo";
 const SECRET_KEY_Staging3 =
     "050b26268677daac1ffd4ad1accbb9c942922a804925b3c67f8893098866cbcb";
 
+//----------------------------- Production Keys----------------------------------------------------------------------------------------
+
+const CLIENT_KEY_Prod1 = "NPSkZZYefGyKvBxi";
+const SECRET_KEY_Prod1 =
+    "6c8d964e7d472076eae7beb0a1f5b2b81c0afbb479307a211029ace597656957";
+
 //------------------------------Testing Keys---------------------------------------------------------------------------------------
 
 //demo.chaiport@gmail.com	PjPR5UPoKGGG
