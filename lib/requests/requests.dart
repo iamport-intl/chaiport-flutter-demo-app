@@ -9,14 +9,12 @@ import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.d
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
 
 class Requests {
-  final devEnvironment = STAGING;
-  final clientKey = CLIENT_KEY_Staging1;
-  final secretKey = SECRET_KEY_Staging1;
+  final devEnvironment = PRODUCTION;
+  final clientKey = CLIENT_KEY_Prod1;
+  final secretKey = SECRET_KEY_Prod1;
   final mobileNo = "+919913379694";
-  final environment = LIVE;
+  final environment = SANDBOX;
   final currency = VND;
-
-
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -69,7 +67,7 @@ class Requests {
         signatureHash,
         "api",
         "https://www.google.com",
-        "live");
+        environment);
     return webCheckoutRequest;
   }
 
@@ -125,7 +123,7 @@ class Requests {
         redirectUrl: "chaipay://checkout",
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
-        environment: "live");
+        environment: environment);
     return tokenizationRequest;
   }
 
@@ -175,7 +173,7 @@ class Requests {
             shippingPhone: "9998878788"),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
-        environment: "live");
+        environment: environment);
     return tokenizationRequest;
   }
 
