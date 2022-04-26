@@ -30,7 +30,8 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    chai = ChaiPortImpl(context, requests.environment, requests.devEnvironment);
+    chai = ChaiPortImpl(
+        context, requests.environment, true, requests.devEnvironment);
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       final json = jsonEncode(paymentStatus);
@@ -63,9 +64,14 @@ class _HomeState extends State<Home> {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    _intentData = ReceiveSharingIntent.getTextStream().listen((String url) {
+    chai.setPaymentLinkListener(callback: (String paymentLink) {
+      print('CHAI_PaymentLink-> $paymentLink');
+    });
+    _intentData =
+        ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
-        chai.processPaymentStatus(url, requests.environment);
+        print('CHAI_DeepLink-> $deeplink');
+        chai.processPaymentStatus(deeplink, requests.environment);
       });
     });
   }
