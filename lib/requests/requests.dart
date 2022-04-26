@@ -14,7 +14,7 @@ class Requests {
   final secretKey = SECRET_KEY_Prod1;
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
-  final currency = VND;
+  final currency = THB;
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
