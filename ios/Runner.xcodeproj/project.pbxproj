@@ -3,28 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		3A0E125F27BFB552004CD02A /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E125E27BFB552004CD02A /* ShareViewController.swift */; };
-		3A0E126227BFB552004CD02A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0E126027BFB552004CD02A /* MainInterface.storyboard */; };
-		3A0E126627BFB552004CD02A /* receivingIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A0E125C27BFB552004CD02A /* receivingIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3A80E32E27CCE6830043F222 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A80E32D27CCE6830043F222 /* ShareViewController.swift */; };
+		3A80E33127CCE6830043F222 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A80E32F27CCE6830043F222 /* MainInterface.storyboard */; };
+		3A80E33527CCE6830043F222 /* Share Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A80E32B27CCE6830043F222 /* Share Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		FB5F411F9DF21317B49F9A45 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D3B4C4FFD9234D709DDD94C /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3A0E126427BFB552004CD02A /* PBXContainerItemProxy */ = {
+		3A80E33327CCE6830043F222 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3A0E125B27BFB552004CD02A;
-			remoteInfo = receivingIntent;
+			remoteGlobalIDString = 3A80E32A27CCE6830043F222;
+			remoteInfo = "Share Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -35,7 +36,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3A0E126627BFB552004CD02A /* receivingIntent.appex in Embed App Extensions */,
+				3A80E33527CCE6830043F222 /* Share Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,13 +56,20 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		3A0E125C27BFB552004CD02A /* receivingIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = receivingIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D3B4C4FFD9234D709DDD94C /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A0E125E27BFB552004CD02A /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		3A0E126127BFB552004CD02A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		3A0E126327BFB552004CD02A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A0E126C27BFB7D2004CD02A /* receivingIntentDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = receivingIntentDebug.entitlements; sourceTree = "<group>"; };
 		3A0E126D27BFB889004CD02A /* RunnerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerDebug.entitlements; sourceTree = "<group>"; };
+		3A80E32B27CCE6830043F222 /* Share Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A80E32D27CCE6830043F222 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		3A80E33027CCE6830043F222 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		3A80E33227CCE6830043F222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A80E33A27CDF0FF0043F222 /* Share Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Share Extension.entitlements"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		3D65FF815EA572DFBCA645CD /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		600DE89C5420C2F8FA2F4B58 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -72,10 +80,11 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA6284E8F5A2CF067AAFC80B /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A0E125927BFB552004CD02A /* Frameworks */ = {
+		3A80E32827CCE6830043F222 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -86,12 +95,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB5F411F9DF21317B49F9A45 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05EEB0667BB4B19AD6E8B159 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CA6284E8F5A2CF067AAFC80B /* Pods-Runner.debug.xcconfig */,
+				3D65FF815EA572DFBCA645CD /* Pods-Runner.release.xcconfig */,
+				600DE89C5420C2F8FA2F4B58 /* Pods-Runner.profile.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		3A0E125D27BFB552004CD02A /* receivingIntent */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +121,17 @@
 				3A0E126327BFB552004CD02A /* Info.plist */,
 			);
 			path = receivingIntent;
+			sourceTree = "<group>";
+		};
+		3A80E32C27CCE6830043F222 /* Share Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3A80E33A27CDF0FF0043F222 /* Share Extension.entitlements */,
+				3A80E32D27CCE6830043F222 /* ShareViewController.swift */,
+				3A80E32F27CCE6830043F222 /* MainInterface.storyboard */,
+				3A80E33227CCE6830043F222 /* Info.plist */,
+			);
+			path = "Share Extension";
 			sourceTree = "<group>";
 		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
@@ -120,7 +151,10 @@
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				3A0E125D27BFB552004CD02A /* receivingIntent */,
+				3A80E32C27CCE6830043F222 /* Share Extension */,
 				97C146EF1CF9000F007C117D /* Products */,
+				05EEB0667BB4B19AD6E8B159 /* Pods */,
+				A17077966FA4A427EC44A5E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
-				3A0E125C27BFB552004CD02A /* receivingIntent.appex */,
+				3A80E32B27CCE6830043F222 /* Share Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,30 +183,39 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
+		A17077966FA4A427EC44A5E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D3B4C4FFD9234D709DDD94C /* Pods_Runner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3A0E125B27BFB552004CD02A /* receivingIntent */ = {
+		3A80E32A27CCE6830043F222 /* Share Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3A0E126727BFB552004CD02A /* Build configuration list for PBXNativeTarget "receivingIntent" */;
+			buildConfigurationList = 3A80E33927CCE6830043F222 /* Build configuration list for PBXNativeTarget "Share Extension" */;
 			buildPhases = (
-				3A0E125827BFB552004CD02A /* Sources */,
-				3A0E125927BFB552004CD02A /* Frameworks */,
-				3A0E125A27BFB552004CD02A /* Resources */,
+				3A80E32727CCE6830043F222 /* Sources */,
+				3A80E32827CCE6830043F222 /* Frameworks */,
+				3A80E32927CCE6830043F222 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = receivingIntent;
-			productName = receivingIntent;
-			productReference = 3A0E125C27BFB552004CD02A /* receivingIntent.appex */;
+			name = "Share Extension";
+			productName = "Share Extension";
+			productReference = 3A80E32B27CCE6830043F222 /* Share Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+				4AA3552987652F73075FC116 /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
@@ -180,11 +223,12 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				3A0E126B27BFB552004CD02A /* Embed App Extensions */,
+				2C1C89CA6E967C452969851B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A0E126527BFB552004CD02A /* PBXTargetDependency */,
+				3A80E33427CCE6830043F222 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -201,7 +245,7 @@
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
-					3A0E125B27BFB552004CD02A = {
+					3A80E32A27CCE6830043F222 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
 					97C146ED1CF9000F007C117D = {
@@ -224,17 +268,17 @@
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
-				3A0E125B27BFB552004CD02A /* receivingIntent */,
+				3A80E32A27CCE6830043F222 /* Share Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3A0E125A27BFB552004CD02A /* Resources */ = {
+		3A80E32927CCE6830043F222 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0E126227BFB552004CD02A /* MainInterface.storyboard in Resources */,
+				3A80E33127CCE6830043F222 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +296,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2C1C89CA6E967C452969851B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +326,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
+		};
+		4AA3552987652F73075FC116 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Runner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -283,11 +366,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3A0E125827BFB552004CD02A /* Sources */ = {
+		3A80E32727CCE6830043F222 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A0E125F27BFB552004CD02A /* ShareViewController.swift in Sources */,
+				3A80E32E27CCE6830043F222 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,10 +386,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A0E126527BFB552004CD02A /* PBXTargetDependency */ = {
+		3A80E33427CCE6830043F222 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3A0E125B27BFB552004CD02A /* receivingIntent */;
-			targetProxy = 3A0E126427BFB552004CD02A /* PBXContainerItemProxy */;
+			target = 3A80E32A27CCE6830043F222 /* Share Extension */;
+			targetProxy = 3A80E33327CCE6830043F222 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -315,6 +398,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A0E126127BFB552004CD02A /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		3A80E32F27CCE6830043F222 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A80E33027CCE6830043F222 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -404,7 +495,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.chai.chaiFlutterDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaipay.flutterSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -413,7 +504,7 @@
 			};
 			name = Profile;
 		};
-		3A0E126827BFB552004CD02A /* Debug */ = {
+		3A80E33627CCE6830043F222 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -422,14 +513,14 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = receivingIntent/receivingIntentDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24H3Q69HGF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = receivingIntent/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = receivingIntent;
+				INFOPLIST_FILE = "Share Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -451,7 +542,7 @@
 			};
 			name = Debug;
 		};
-		3A0E126927BFB552004CD02A /* Release */ = {
+		3A80E33727CCE6830043F222 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -460,12 +551,14 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24H3Q69HGF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = receivingIntent/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = receivingIntent;
+				INFOPLIST_FILE = "Share Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,7 +568,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.chai.chaiFlutterDemoApp.receivingIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaipay.flutterSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -484,7 +577,7 @@
 			};
 			name = Release;
 		};
-		3A0E126A27BFB552004CD02A /* Profile */ = {
+		3A80E33827CCE6830043F222 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -493,12 +586,14 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Share Extension/Share Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24H3Q69HGF;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = receivingIntent/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = receivingIntent;
+				INFOPLIST_FILE = "Share Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Share Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -508,7 +603,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.chai.chaiFlutterDemoApp.receivingIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaipay.flutterSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -667,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.flutter.chai.chaiFlutterDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chaipay.flutterSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -679,12 +774,12 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3A0E126727BFB552004CD02A /* Build configuration list for PBXNativeTarget "receivingIntent" */ = {
+		3A80E33927CCE6830043F222 /* Build configuration list for PBXNativeTarget "Share Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3A0E126827BFB552004CD02A /* Debug */,
-				3A0E126927BFB552004CD02A /* Release */,
-				3A0E126A27BFB552004CD02A /* Profile */,
+				3A80E33627CCE6830043F222 /* Debug */,
+				3A80E33727CCE6830043F222 /* Release */,
+				3A80E33827CCE6830043F222 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
