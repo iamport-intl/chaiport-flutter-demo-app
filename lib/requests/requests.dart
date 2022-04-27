@@ -26,48 +26,50 @@ class Requests {
 
   WebCheckoutRequest getRequestBody() {
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", currency,
+    String signatureHash = hash.getSignatureHash("19010.2", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
-        amount:50010,
-        billingDetails:Billing_details(
+        amount: 19010.2,
+        billingDetails: Billing_details(
             billingAddress: Billing_address(
                 "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
             billingPhone: "+848959893980"),
-        chaipayKey:clientKey,
-        countryCode:"VN",
-        currency:currency,
-        defaultGuestCheckout:false,
-        description:"By Aagam",
-        env:devEnvironment,
-        expiryHours:1,
-        failureUrl:"https://www.bing.com",
-        isCheckoutEmbed:false,
-        merchantDetails:Merchant_details(
+        chaipayKey: clientKey,
+        countryCode: "VN",
+        currency: currency,
+        defaultGuestCheckout: false,
+        description: "By Aagam",
+        env: devEnvironment,
+        expiryHours: 1,
+        failureUrl: "https://www.bing.com",
+        isCheckoutEmbed: false,
+        merchantDetails: Merchant_details(
             name: "Gumnam",
             backUrl: "https://demo.chaipay.io/checkout.html",
             logo:
-            "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+                "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
             promoCode: null,
             promoDiscount: 10000.00,
             shippingCharges: 10000.00),
-        merchantOrderId:orderId,
-        orderDetails:<Order_details>[Order_details("knb", "kim nguyen bao", 50010, 1)],
-        mobileRedirectUrl:"chaipay://checkout",
-        shippingDetails:Shipping_details(
+        merchantOrderId: orderId,
+        orderDetails: <Order_details>[
+          Order_details("knb", "kim nguyen bao", 19010.2, 1)
+        ],
+        mobileRedirectUrl: "chaipay://checkout",
+        shippingDetails: Shipping_details(
             shippingAddress: Shipping_address(
                 "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
             shippingEmail: "markweins@gmail.com",
             shippingName: "Test mark",
             shippingPhone: "+848959893980"),
-        showBackButton:true,
-        showShippingDetails:true,
-        signatureHash:signatureHash,
-        source:"api",
-        successUrl:"https://www.google.com",
-        environment:environment);
+        showBackButton: true,
+        showShippingDetails: true,
+        signatureHash: signatureHash,
+        source: "api",
+        successUrl: "https://www.google.com",
+        environment: environment);
     return webCheckoutRequest;
   }
 
