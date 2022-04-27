@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
 
     chai = ChaiPortImpl(
-        context, requests.environment, false, requests.devEnvironment);
+        context, requests.environment, true, requests.devEnvironment);
 
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {

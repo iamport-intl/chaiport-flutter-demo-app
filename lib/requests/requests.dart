@@ -14,7 +14,7 @@ class Requests {
   final secretKey = SECRET_KEY_Prod1;
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
-  final currency = THB;
+  final currency = SGD;
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -26,13 +26,24 @@ class Requests {
 
   WebCheckoutRequest getRequestBody() {
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("19010.2", currency,
-        "https://www.bing.com", orderId, clientKey, "https://www.google.com");
+    String signatureHash = hash.getSignatureHash(
+        amount: "19010.2",
+        currency: currency,
+        failureUrl: "https://dev-checkout.chaipay.io/failure.html",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://dev-checkout.chaipay.io/success.html");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
         amount: 19010.2,
-        billingDetails: Billing_details(
-            billingAddress: Billing_address(
-                "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
+        billingDetails: BillingDetailsWebCheckout(
+            billingAddress: BillingAddressWebCheckout(
+                city: "VND",
+                countryCode: "VN",
+                line1: "address",
+                line2: "address_2",
+                locale: "en",
+                postalCode: "400202",
+                state: "Mah"),
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
             billingPhone: "+848959893980"),
@@ -43,9 +54,9 @@ class Requests {
         description: "By Aagam",
         env: devEnvironment,
         expiryHours: 1,
-        failureUrl: "https://www.bing.com",
+        failureUrl: "https://dev-checkout.chaipay.io/failure.html",
         isCheckoutEmbed: false,
-        merchantDetails: Merchant_details(
+        merchantDetails: MerchantDetails(
             name: "Gumnam",
             backUrl: "https://demo.chaipay.io/checkout.html",
             logo:
@@ -54,13 +65,20 @@ class Requests {
             promoDiscount: 10000.00,
             shippingCharges: 10000.00),
         merchantOrderId: orderId,
-        orderDetails: <Order_details>[
-          Order_details("knb", "kim nguyen bao", 19010.2, 1)
+        orderDetails: <OrderDetailsWebCheckout>[
+          OrderDetailsWebCheckout(
+              id: "knb", name: "kim nguyen bao", price: 19010.2, quantity: 1)
         ],
         mobileRedirectUrl: "chaipay://checkout",
-        shippingDetails: Shipping_details(
-            shippingAddress: Shipping_address(
-                "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
+        shippingDetails: ShippingDetailsWebCheckout(
+            shippingAddress: BillingAddressWebCheckout(
+                city: "VND",
+                countryCode: "VN",
+                line1: "address",
+                line2: "address_2",
+                locale: "en",
+                postalCode: "400202",
+                state: "Mah"),
             shippingEmail: "markweins@gmail.com",
             shippingName: "Test mark",
             shippingPhone: "+848959893980"),
@@ -68,7 +86,7 @@ class Requests {
         showShippingDetails: true,
         signatureHash: signatureHash,
         source: "api",
-        successUrl: "https://www.google.com",
+        successUrl: "https://dev-checkout.chaipay.io/success.html",
         environment: environment);
     return webCheckoutRequest;
   }
@@ -77,8 +95,13 @@ class Requests {
     const paymentChannel = "VTCPAY";
     const paymentMethod = "VTCPAY_CREDIT_CARD";
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", currency,
-        "https://www.bing.com", orderId, clientKey, "https://www.google.com");
+    String signatureHash = hash.getSignatureHash(
+        amount: "50010",
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://www.google.com");
     WithTokenizationRequest tokenizationRequest = WithTokenizationRequest(
         amount: 50010,
         billingDetails: BillingDetailsTokenization(
@@ -133,8 +156,13 @@ class Requests {
     const paymentChannel = "VNPAY";
     const paymentMethod = "VNPAY_ALL";
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("50010", currency,
-        "https://www.bing.com", orderId, clientKey, "https://www.google.com");
+    String signatureHash = hash.getSignatureHash(
+        amount: "50010",
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://www.google.com");
     WithoutTokenizationRequest tokenizationRequest = WithoutTokenizationRequest(
         amount: 50010,
         billingDetails: BillingDetails(

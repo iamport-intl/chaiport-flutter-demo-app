@@ -3,8 +3,13 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:crypto/crypto.dart';
 
 class SignatureHash {
-  String getSignatureHash(String amount, String currency, String failureUrl,
-      String orderId, String clientKey, String successUrl) {
+  String getSignatureHash(
+      {required String amount,
+      required String currency,
+      required String failureUrl,
+      required String orderId,
+      required String clientKey,
+      required String successUrl}) {
     Requests requests = Requests();
 
     Map<String, String> params = {
