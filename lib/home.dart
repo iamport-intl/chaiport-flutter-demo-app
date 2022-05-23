@@ -30,49 +30,25 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    chai = ChaiPortImpl(
-        context, requests.environment, true, requests.devEnvironment);
+    chai = ChaiPortImpl(context, requests.environment);
 
     chai.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       final json = jsonEncode(paymentStatus);
-      print('CHAI_PaymentStatus-> $json');
+      print('CHAIPort_PaymentStatus-> $json');
       navigateToResult(paymentStatus);
     });
-    chai.setOtpListener(callback: (GetOtpResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
-    chai.setPaymentMethodsListener(callback: (PaymentMethodResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
-    chai.setSavedCardsListener(callback: (CreditCardDetailsResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
-    chai.setCheckoutWithTokenizationListener(
-        callback: (WithTokenizationResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
-    chai.setCheckoutWithoutTokenizationListener(
-        callback: (WithoutTokenizationResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
-    chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
-      final json = jsonEncode(response);
-      print('CHAI_Response-> $response--> $json');
-    });
+
     chai.setPaymentLinkListener(callback: (String paymentLink) {
-      print('CHAI_PaymentLink-> $paymentLink');
+      print('CHAIPort_PaymentLink-> $paymentLink');
     });
+
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
-        print('CHAI_DeepLink-> $deeplink');
         chai.processPaymentStatus(deeplink, requests.environment);
+        print(
+            'CHAIPort_DeepLink_Received-> ${requests.environment}  $deeplink');
       });
     });
   }
@@ -100,18 +76,8 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // chai.getOTP(requests.mobileNo);
                   chai.checkoutUsingWeb(requests.getJWTToken(),
                       requests.clientKey, requests.getRequestBody(), chai);
-                  // chai.getPaymentMethods(requests.clientKey);
-                  // chai.getSavedCards(
-                  //     "", requests.clientKey, requests.mobileNo, "217910");
-                  // chai.checkoutWithTokenization(
-                  //     requests.getTokenizationRequest());
-                  // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest());
-                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
-                  //     requests.getChanexTokenRequest());
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
