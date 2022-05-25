@@ -153,8 +153,8 @@ class Requests {
   }
 
   WithoutTokenizationRequest getWithoutTokenizationRequest() {
-    const paymentChannel = "VNPAY";
-    const paymentMethod = "VNPAY_ALL";
+    const paymentChannel = "PAYPAL";
+    const paymentMethod = "PAYPAL_ALL";
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
         amount: "50010",
@@ -203,6 +203,7 @@ class Requests {
             shippingPhone: "9998878788"),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
+        source: "mobile",
         environment: environment);
     return tokenizationRequest;
   }
