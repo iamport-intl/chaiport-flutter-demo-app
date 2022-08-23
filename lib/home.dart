@@ -4,8 +4,10 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/dto/responses/bank_list_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/direct_bank_transfer_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
@@ -68,6 +70,14 @@ class _HomeState extends State<Home> {
     chai.setPaymentLinkListener(callback: (String paymentLink) {
       print('CHAI_PaymentLink-> $paymentLink');
     });
+    chai.setBankListListener(callback: (BankListResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_BankList-> $json');
+    });
+    chai.setDBTDetailsListener(callback: (DBTDetailsResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_DBTDetails-> $json');
+    });
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
@@ -101,8 +111,8 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  chai.checkoutUsingWeb(requests.getJWTToken(),
-                      requests.clientKey, requests.getRequestBody(), chai);
+                  // chai.checkoutUsingWeb(requests.getJWTToken(),
+                  //     requests.clientKey, requests.getRequestBody(), chai);
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
@@ -112,6 +122,14 @@ class _HomeState extends State<Home> {
                   //     requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
                   //     requests.getChanexTokenRequest());
+                  chai.checkoutUsingDirectBankTransfer(
+                      requests.getCheckoutWithDirectBankTransferRequest(),
+                      chai);
+                  // chai.checkoutUsingInstallation(
+                  //     requests.getCheckoutWithInstallationRequest(), chai);
+                  // chai.getBankList(
+                  //     requests.paymentChannel, requests.getBankListRequest());
+                  // chai.getDBTDetails(requests.clientKey);
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),

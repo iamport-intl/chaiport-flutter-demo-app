@@ -3,7 +3,13 @@ import 'package:chai_flutter_demo_app/utils/jwt_token_generation.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/constants/constants.dart';
+import 'package:chaipay_flutter_package/dto/requests/bank_list_request.dart';
+import 'package:chaipay_flutter_package/dto/requests/billing_details.dart';
 import 'package:chaipay_flutter_package/dto/requests/chanex_token_request.dart';
+import 'package:chaipay_flutter_package/dto/requests/checkout_with_direct_bank_transfer_request.dart';
+import 'package:chaipay_flutter_package/dto/requests/checkout_with_installation_request.dart';
+import 'package:chaipay_flutter_package/dto/requests/order_details.dart';
+import 'package:chaipay_flutter_package/dto/requests/shipping_details.dart';
 import 'package:chaipay_flutter_package/dto/requests/web_checkout_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
@@ -14,7 +20,9 @@ class Requests {
   final secretKey = SECRET_KEY_Prod1;
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
-  final currency = SGD;
+  final currency = THB;
+  final paymentChannel = "CHAIPORT";
+  final paymentMethod = "CHAIPORT_DIRECT_BANK_TRANSFER";
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -35,8 +43,8 @@ class Requests {
         successUrl: "https://dev-checkout.chaipay.io/success.html");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
         amount: 19010.2,
-        billingDetails: BillingDetailsWebCheckout(
-            billingAddress: BillingAddressWebCheckout(
+        billingDetails: BillingDetails(
+            billingAddress: BillingAddress(
                 city: "VND",
                 countryCode: "VN",
                 line1: "address",
@@ -65,13 +73,13 @@ class Requests {
             promoDiscount: 10000.00,
             shippingCharges: 10000.00),
         merchantOrderId: orderId,
-        orderDetails: <OrderDetailsWebCheckout>[
-          OrderDetailsWebCheckout(
+        orderDetails: <OrderDetails>[
+          OrderDetails(
               id: "knb", name: "kim nguyen bao", price: 19010.2, quantity: 1)
         ],
         mobileRedirectUrl: "chaipay://checkout",
-        shippingDetails: ShippingDetailsWebCheckout(
-            shippingAddress: BillingAddressWebCheckout(
+        shippingDetails: ShippingDetails(
+            shippingAddress: ShippingAddress(
                 city: "VND",
                 countryCode: "VN",
                 line1: "address",
@@ -92,8 +100,6 @@ class Requests {
   }
 
   WithTokenizationRequest getTokenizationRequest() {
-    const paymentChannel = "VTCPAY";
-    const paymentMethod = "VTCPAY_CREDIT_CARD";
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
         amount: "50010",
@@ -104,8 +110,8 @@ class Requests {
         successUrl: "https://www.google.com");
     WithTokenizationRequest tokenizationRequest = WithTokenizationRequest(
         amount: 50010,
-        billingDetails: BillingDetailsTokenization(
-            billingAddress: BillingAddressTokenization(
+        billingDetails: BillingDetails(
+            billingAddress: BillingAddress(
                 city: "TH",
                 countryCode: "TH",
                 locale: "en",
@@ -116,8 +122,8 @@ class Requests {
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
             billingPhone: "9998878788"),
-        shippingDetails: ShippingDetailsTokenization(
-            shippingAddress: BillingAddressTokenization(
+        shippingDetails: ShippingDetails(
+            shippingAddress: ShippingAddress(
                 city: "TH",
                 countryCode: "TH",
                 locale: "en",
@@ -140,7 +146,7 @@ class Requests {
         key: clientKey,
         merchantOrderId: orderId,
         orderDetails: [
-          OrderDetailsTokenization(
+          OrderDetails(
               id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
         ],
         pmtChannel: paymentChannel,
@@ -153,8 +159,6 @@ class Requests {
   }
 
   WithoutTokenizationRequest getWithoutTokenizationRequest() {
-    const paymentChannel = "VNPAY";
-    const paymentMethod = "VNPAY_ALL";
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
         amount: "50010",
@@ -190,7 +194,7 @@ class Requests {
         pmtMethod: paymentMethod,
         redirectUrl: "chaipay://checkout",
         shippingDetails: ShippingDetails(
-            shippingAddress: BillingAddress(
+            shippingAddress: ShippingAddress(
                 city: "VND",
                 countryCode: "VN",
                 line1: "address",
@@ -211,6 +215,132 @@ class Requests {
     ChanexTokenRequest chanexTokenRequest =
         ChanexTokenRequest(card: vtcPayCreditCard());
     return chanexTokenRequest;
+  }
+
+  CheckoutWithDirectBankTransferRequest
+      getCheckoutWithDirectBankTransferRequest() {
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash(
+        amount: "50010",
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://www.google.com");
+    CheckoutWithDirectBankTransferRequest request =
+        CheckoutWithDirectBankTransferRequest(
+            amount: 50010,
+            billingDetails: BillingDetails(
+                billingAddress: BillingAddress(
+                    city: "VND",
+                    countryCode: "VN",
+                    line1: "address",
+                    line2: "address_2",
+                    locale: "en",
+                    postalCode: "400202",
+                    state: "Mah"),
+                billingEmail: "markweins@gmail.com",
+                billingName: "Test mark",
+                billingPhone: "9998878788"),
+            currency: currency,
+            env: "dev",
+            failureUrl: "https://www.bing.com",
+            key: clientKey,
+            source: "mobile",
+            merchantOrderId: orderId,
+            orderDetails: [
+              OrderDetails(
+                  id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
+            ],
+            pmtChannel: paymentChannel,
+            pmtMethod: paymentMethod,
+            shippingDetails: ShippingDetails(
+                shippingAddress: ShippingAddress(
+                    city: "VND",
+                    countryCode: "VN",
+                    line1: "address",
+                    line2: "address_2",
+                    locale: "en",
+                    postalCode: "400202",
+                    state: "Mah"),
+                shippingEmail: "markweins@gmail.com",
+                shippingName: "Test mark",
+                shippingPhone: "9998878788"),
+            signatureHash: signatureHash,
+            successUrl: "https://www.google.com",
+            environment: environment);
+    return request;
+  }
+
+  CheckoutWithInstallationRequest getCheckoutWithInstallationRequest() {
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash(
+        amount: "50010",
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://www.google.com");
+    CheckoutWithInstallationRequest request = CheckoutWithInstallationRequest(
+        amount: 50010,
+        billingDetails: BillingDetails(
+            billingAddress: BillingAddress(
+                city: "VND",
+                countryCode: "VN",
+                line1: "address",
+                line2: "address_2",
+                locale: "en",
+                postalCode: "400202",
+                state: "Mah"),
+            billingEmail: "markweins@gmail.com",
+            billingName: "Test mark",
+            billingPhone: "9998878788"),
+        currency: currency,
+        env: "dev",
+        failureUrl: "https://www.bing.com",
+        key: clientKey,
+        source: "mobile",
+        merchantOrderId: orderId,
+        orderDetails: [
+          OrderDetails(
+              id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
+        ],
+        pmtChannel: paymentChannel,
+        pmtMethod: paymentMethod,
+        redirectUrl: "chaipay://checkout",
+        shippingDetails: ShippingDetails(
+            shippingAddress: ShippingAddress(
+                city: "VND",
+                countryCode: "VN",
+                line1: "address",
+                line2: "address_2",
+                locale: "en",
+                postalCode: "400202",
+                state: "Mah"),
+            shippingEmail: "markweins@gmail.com",
+            shippingName: "Test mark",
+            shippingPhone: "9998878788"),
+        signatureHash: signatureHash,
+        successUrl: "https://www.google.com",
+        bankDetails: BankDetails(
+            bankCode: "installment_bay",
+            bankName: "Krungsri",
+            isMerchantSponsored: false,
+            installmentPeriod: InstallmentPeriod(month: 4, interest: 0.8)),
+        environment: environment);
+    return request;
+  }
+
+  BankListRequest getBankListRequest() {
+    const paymentMethod = "OMISE_INSTALLMENT";
+    BankListRequest request = BankListRequest();
+    request.amount = 20023;
+    request.environment = environment;
+    request.iamportKey = clientKey;
+    request.isMerchantSponsored = false;
+    request.methodKey = paymentMethod;
+    request.overrideDefault = false;
+    return request;
   }
 
   Card adayenCard() {
