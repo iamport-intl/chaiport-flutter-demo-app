@@ -121,7 +121,7 @@ class Requests {
                 state: "Mah"),
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
-            billingPhone: "9998878788"),
+            billingPhone: mobileNo),
         shippingDetails: ShippingDetails(
             shippingAddress: ShippingAddress(
                 city: "TH",
@@ -133,7 +133,7 @@ class Requests {
                 state: "Mah"),
             shippingEmail: "markweins@gmail.com",
             shippingName: "Test mark",
-            shippingPhone: "9998878788"),
+            shippingPhone: mobileNo),
         tokenParams: TokenParams(
             expiryMonth: "04",
             expiryYear: "2025",
@@ -161,14 +161,14 @@ class Requests {
   WithoutTokenizationRequest getWithoutTokenizationRequest() {
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
-        amount: "50010",
+        amount: "20210",
         currency: currency,
         failureUrl: "https://www.bing.com",
         orderId: orderId,
         clientKey: clientKey,
         successUrl: "https://www.google.com");
     WithoutTokenizationRequest tokenizationRequest = WithoutTokenizationRequest(
-        amount: 50010,
+        amount: 20210,
         billingDetails: BillingDetails(
             billingAddress: BillingAddress(
                 city: "VND",
@@ -180,7 +180,7 @@ class Requests {
                 state: "Mah"),
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
-            billingPhone: "9998878788"),
+            billingPhone: "+848959893980"),
         currency: currency,
         env: "dev",
         failureUrl: "https://www.bing.com",
@@ -204,10 +204,11 @@ class Requests {
                 state: "Mah"),
             shippingEmail: "markweins@gmail.com",
             shippingName: "Test mark",
-            shippingPhone: "9998878788"),
+            shippingPhone: mobileNo),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
-        environment: environment);
+        environment: environment,
+        source: "mobile");
     return tokenizationRequest;
   }
 
@@ -241,7 +242,7 @@ class Requests {
                     state: "Mah"),
                 billingEmail: "markweins@gmail.com",
                 billingName: "Test mark",
-                billingPhone: "9998878788"),
+                billingPhone: mobileNo),
             currency: currency,
             env: "dev",
             failureUrl: "https://www.bing.com",
@@ -265,7 +266,7 @@ class Requests {
                     state: "Mah"),
                 shippingEmail: "markweins@gmail.com",
                 shippingName: "Test mark",
-                shippingPhone: "9998878788"),
+                shippingPhone: mobileNo),
             signatureHash: signatureHash,
             successUrl: "https://www.google.com",
             environment: environment);
@@ -294,7 +295,7 @@ class Requests {
                 state: "Mah"),
             billingEmail: "markweins@gmail.com",
             billingName: "Test mark",
-            billingPhone: "9998878788"),
+            billingPhone: mobileNo),
         currency: currency,
         env: "dev",
         failureUrl: "https://www.bing.com",
@@ -319,7 +320,7 @@ class Requests {
                 state: "Mah"),
             shippingEmail: "markweins@gmail.com",
             shippingName: "Test mark",
-            shippingPhone: "9998878788"),
+            shippingPhone: mobileNo),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
         bankDetails: BankDetails(
@@ -375,6 +376,18 @@ class Requests {
         serviceCode: "123",
         expirationYear: "2030",
         expirationMonth: "01",
+        saveCard: true);
+    return card;
+  }
+
+  Card gbppDebiCard() {
+    Card card = Card(
+        cardNumber: "4535017710535741",
+        cardType: "Visa",
+        cardholderName: "NGUYEN VAN A",
+        serviceCode: "184",
+        expirationYear: "2028",
+        expirationMonth: "05",
         saveCard: true);
     return card;
   }
