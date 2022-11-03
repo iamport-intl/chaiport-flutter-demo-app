@@ -10,6 +10,7 @@ import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/without_tokenization_response.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -25,6 +26,7 @@ class _HomeState extends State<Home> {
   Requests requests = Requests();
   late StreamSubscription _intentData;
   SignatureHash hash = SignatureHash();
+  String paymentLink = "";
 
   @override
   void initState() {
@@ -66,6 +68,8 @@ class _HomeState extends State<Home> {
     });
     chai.setPaymentLinkListener(callback: (String paymentLink) {
       print('CHAI_PaymentLink-> $paymentLink');
+      this.paymentLink = paymentLink;
+      setState(() {});
     });
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
@@ -100,15 +104,15 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  chai.checkoutUsingWeb(requests.getJWTToken(),
-                      requests.clientKey, requests.getRequestBody(), chai);
+                  // chai.checkoutUsingWeb(requests.getJWTToken(),
+                  //     requests.clientKey, requests.getRequestBody(), chai);
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
                   // chai.checkoutWithTokenization(
                   //     requests.getTokenizationRequest());
-                  // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest());
+                  chai.checkoutWithoutTokenization(
+                      requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
                   //     requests.getChanexTokenRequest());
                 },
@@ -116,6 +120,23 @@ class _HomeState extends State<Home> {
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
                   child: Text('Checkout',
                       style: TextStyle(fontSize: 30, color: Colors.white)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(paymentLink),
+              ),
+              TextButton(
+                onPressed: () async {
+                  FlutterClipboard.copy(paymentLink);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                ),
+                child: const Text(
+                  'Copy',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
