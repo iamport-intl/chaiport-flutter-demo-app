@@ -9,12 +9,13 @@ import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.d
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
 
 class Requests {
-  final devEnvironment = PRODUCTION;
-  final clientKey = CLIENT_KEY_Prod1;
-  final secretKey = SECRET_KEY_Prod1;
+  final devEnvironment = STAGING;
+  final clientKey = "peDucBDufdHxPTzB";
+  final secretKey =
+      "87602609428acdfbc0ebad78b091395f008769637eea22c288c757667171c3f7";
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
-  final currency = THB;
+  final currency = VND;
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -26,10 +27,10 @@ class Requests {
 
   WebCheckoutRequest getRequestBody() {
     String orderId = randomString.getRandomString(6);
-    String signatureHash = hash.getSignatureHash("19010.2", currency,
+    String signatureHash = hash.getSignatureHash("19010", currency,
         "https://www.bing.com", orderId, clientKey, "https://www.google.com");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
-        amount: 19010.2,
+        amount: 19010,
         billingDetails: Billing_details(
             billingAddress: Billing_address(
                 "VND", "VN", "en", "address", "address_2", "400202", "Mah"),
@@ -55,7 +56,7 @@ class Requests {
             shippingCharges: 10000.00),
         merchantOrderId: orderId,
         orderDetails: <Order_details>[
-          Order_details("knb", "kim nguyen bao", 19010.2, 1)
+          Order_details("knb", "kim nguyen bao", 19010, 1)
         ],
         mobileRedirectUrl: "chaipay://checkout",
         shippingDetails: Shipping_details(

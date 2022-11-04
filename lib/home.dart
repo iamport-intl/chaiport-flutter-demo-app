@@ -104,15 +104,15 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
-                  // chai.checkoutUsingWeb(requests.getJWTToken(),
-                  //     requests.clientKey, requests.getRequestBody(), chai);
+                  chai.checkoutUsingWeb(requests.getJWTToken(),
+                      requests.clientKey, requests.getRequestBody(), chai);
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
                   // chai.checkoutWithTokenization(
                   //     requests.getTokenizationRequest());
-                  chai.checkoutWithoutTokenization(
-                      requests.getWithoutTokenizationRequest());
+                  // chai.checkoutWithoutTokenization(
+                  //     requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
                   //     requests.getChanexTokenRequest());
                 },
