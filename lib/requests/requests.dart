@@ -323,11 +323,7 @@ class Requests {
             shippingPhone: mobileNo),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
-        bankDetails: BankDetails(
-            bankCode: "installment_bay",
-            bankName: "Krungsri",
-            isMerchantSponsored: false,
-            installmentPeriod: InstallmentPeriod(month: 4, interest: 0.8)),
+        bankDetails: gbppBankDetails(),
         environment: environment);
     return request;
   }
@@ -342,6 +338,24 @@ class Requests {
     request.methodKey = paymentMethod;
     request.overrideDefault = false;
     return request;
+  }
+
+  BankDetails gbppBankDetails() {
+    BankDetails bankDetails = BankDetails(
+        bankCode: "004",
+        bankName: "Kasikorn Bank",
+        isMerchantSponsored: false,
+        installmentPeriod: InstallmentPeriod(month: 8, interest: 0));
+    return bankDetails;
+  }
+
+  BankDetails omiseBankDetails() {
+    BankDetails bankDetails = BankDetails(
+        bankCode: "installment_bay",
+        bankName: "Krungsri",
+        isMerchantSponsored: false,
+        installmentPeriod: InstallmentPeriod(month: 4, interest: 0.8));
+    return bankDetails;
   }
 
   Card adayenCard() {
