@@ -93,7 +93,7 @@ class Requests {
         showBackButton: true,
         showShippingDetails: true,
         signatureHash: signatureHash,
-        source: "api",
+        source: "mobile",
         successUrl: "https://dev-checkout.chaipay.io/success.html",
         environment: environment);
     return webCheckoutRequest;
