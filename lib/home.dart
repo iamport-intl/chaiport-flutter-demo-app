@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
                   // chai.checkoutWithTokenization(
                   //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest());
+                  //     requests.getWithoutTokenizationRequest(), chai);
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
                   //     requests.getChanexTokenRequest());
                   chai.checkoutUsingDirectBankTransfer(
