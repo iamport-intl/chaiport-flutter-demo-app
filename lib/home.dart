@@ -120,11 +120,11 @@ class _HomeState extends State<Home> {
                   //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest(), chai);
-                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
-                  //     requests.getChanexTokenRequest());
-                  chai.checkoutUsingDirectBankTransfer(
-                      requests.getCheckoutWithDirectBankTransferRequest(),
-                      chai);
+                  chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
+                      requests.getChanexTokenRequest(),requests.getJWTToken());
+                  // chai.checkoutUsingDirectBankTransfer(
+                  //     requests.getCheckoutWithDirectBankTransferRequest(),
+                  //     chai);
                   // chai.checkoutUsingInstallation(
                   //     requests.getCheckoutWithInstallationRequest(), chai);
                   // chai.getBankList(

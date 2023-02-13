@@ -15,14 +15,14 @@ import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.d
 import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
 
 class Requests {
-  final devEnvironment = PRODUCTION;
-  final clientKey = CLIENT_KEY_Prod1;
-  final secretKey = SECRET_KEY_Prod1;
+  final devEnvironment = DEV;
+  final clientKey = CLIENT_KEY_Dev3;
+  final secretKey = SECRET_KEY_Dev3;
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
   final currency = THB;
-  final paymentChannel = "CHAIPORT";
-  final paymentMethod = "CHAIPORT_DIRECT_BANK_TRANSFER";
+  final paymentChannel = "OMISE";
+  final paymentMethod = "OMISE_CREDIT_CARD";
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -213,8 +213,7 @@ class Requests {
   }
 
   ChanexTokenRequest getChanexTokenRequest() {
-    ChanexTokenRequest chanexTokenRequest =
-        ChanexTokenRequest(card: vtcPayCreditCard());
+    ChanexTokenRequest chanexTokenRequest = omiseCreditCard();
     return chanexTokenRequest;
   }
 
@@ -358,8 +357,8 @@ class Requests {
     return bankDetails;
   }
 
-  Card adayenCard() {
-    Card card = Card(
+  ChanexTokenRequest adayenCard() {
+    ChanexTokenRequest card = ChanexTokenRequest(
         cardholderName: "NGUYEN VAN A",
         cardType: "Visa",
         cardNumber: "4111111145551142",
@@ -370,20 +369,20 @@ class Requests {
     return card;
   }
 
-  Card omiseCreditCard() {
-    Card card = Card(
-        cardNumber: "4000000000000002",
+  ChanexTokenRequest omiseCreditCard() {
+    ChanexTokenRequest card = ChanexTokenRequest(
+        cardNumber: "4242424242424242",
         cardType: "Visa",
         cardholderName: "NGUYEN VAN A",
-        serviceCode: "737",
-        expirationYear: "2023",
-        expirationMonth: "11",
+        serviceCode: "123",
+        expirationYear: "2025",
+        expirationMonth: "05",
         saveCard: true);
     return card;
   }
 
-  Card vtcPayCreditCard() {
-    Card card = Card(
+  ChanexTokenRequest vtcPayCreditCard() {
+    ChanexTokenRequest card = ChanexTokenRequest(
         cardNumber: "4111111111111111",
         cardType: "Visa",
         cardholderName: "NGUYEN VAN A",
@@ -394,8 +393,8 @@ class Requests {
     return card;
   }
 
-  Card gbppDebiCard() {
-    Card card = Card(
+  ChanexTokenRequest gbppDebiCard() {
+    ChanexTokenRequest card = ChanexTokenRequest(
         cardNumber: "4535017710535741",
         cardType: "Visa",
         cardholderName: "NGUYEN VAN A",
