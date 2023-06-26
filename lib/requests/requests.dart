@@ -153,6 +153,7 @@ class Requests {
         pmtMethod: paymentMethod,
         redirectUrl: "chaipay://checkout",
         signatureHash: signatureHash,
+        source: "mobile",
         successUrl: "https://www.google.com",
         environment: environment);
     return tokenizationRequest;
