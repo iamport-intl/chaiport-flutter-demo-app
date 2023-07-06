@@ -116,6 +116,11 @@ class _HomeState extends State<Home> {
       print('CHAI_DeleteCard-> $json');
     });
 
+    chai.setCaptureTransactionListener(callback: (GenericResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_CapturedTransaction-> $json');
+    });
+
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
@@ -154,8 +159,8 @@ class _HomeState extends State<Home> {
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
-                  chai.checkoutWithTokenization(
-                      requests.getTokenizationRequest());
+                  // chai.checkoutWithTokenization(
+                  //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
@@ -191,6 +196,8 @@ class _HomeState extends State<Home> {
                   //     requests.clientKey,
                   //     DeleteCardRequest(
                   //         token: "735eaf72a0a14965aced3e1f9a339b0b"));
+                  chai.captureTransaction("2SDCUiBEv34oqeIdEDv1pftGeeY",
+                      requests.getJWTToken(), requests.clientKey);
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
