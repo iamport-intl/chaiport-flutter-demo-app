@@ -18,6 +18,7 @@ import 'package:chaipay_flutter_package/dto/responses/get_customer_data_response
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/list_cards_for_customer_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/routes_list_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/without_tokenization_response.dart';
 import 'package:flutter/material.dart';
@@ -121,6 +122,11 @@ class _HomeState extends State<Home> {
       print('CHAI_CapturedTransaction-> $json');
     });
 
+    chai.setRoutesListListener(callback: (RoutesListResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_RoutesList-> $json');
+    });
+
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
@@ -196,8 +202,10 @@ class _HomeState extends State<Home> {
                   //     requests.clientKey,
                   //     DeleteCardRequest(
                   //         token: "735eaf72a0a14965aced3e1f9a339b0b"));
-                  chai.captureTransaction("2SDCUiBEv34oqeIdEDv1pftGeeY",
-                      requests.getJWTToken(), requests.clientKey);
+                  // chai.captureTransaction("2SDCUiBEv34oqeIdEDv1pftGeeY",
+                  //     requests.getJWTToken(), requests.clientKey);
+                  chai.getRoutesList(
+                      requests.clientKey, requests.getJWTToken());
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
