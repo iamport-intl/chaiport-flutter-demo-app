@@ -24,7 +24,7 @@ class Requests {
   final paymentChannel = "OMISE";
   final paymentMethod = "OMISE_CREDIT_CARD";
   final customerUUID = "c60005e1-164c-46fa-b7a1-fbee11543493";
-  final transactionType = "PREAUTH";   // PURCHASE || PREAUTH
+  final transactionType = "PREAUTH"; // PURCHASE || PREAUTH
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -70,7 +70,7 @@ class Requests {
             name: "Gumnam",
             backUrl: "https://demo.chaipay.io/checkout.html",
             logo:
-            "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+                "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
             promoCode: null,
             promoDiscount: 10000.00,
             shippingCharges: 10000.00),
@@ -158,7 +158,8 @@ class Requests {
         source: "mobile",
         successUrl: "https://www.google.com",
         environment: environment,
-        transactionType:transactionType);
+        transactionType: transactionType,
+        routingParams: RoutingParams(type: "failover", routeRef: null));
     return tokenizationRequest;
   }
 
@@ -213,7 +214,7 @@ class Requests {
         successUrl: "https://www.google.com",
         environment: environment,
         source: "mobile",
-        transactionType:transactionType);
+        transactionType: transactionType);
     return tokenizationRequest;
   }
 
@@ -223,7 +224,7 @@ class Requests {
   }
 
   CheckoutWithDirectBankTransferRequest
-  getCheckoutWithDirectBankTransferRequest() {
+      getCheckoutWithDirectBankTransferRequest() {
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
         amount: "50010",
@@ -233,48 +234,48 @@ class Requests {
         clientKey: clientKey,
         successUrl: "https://www.google.com");
     CheckoutWithDirectBankTransferRequest request =
-    CheckoutWithDirectBankTransferRequest(
-        amount: 50010,
-        billingDetails: BillingDetails(
-            billingAddress: BillingAddress(
-                city: "VND",
-                countryCode: "VN",
-                line1: "address",
-                line2: "address_2",
-                locale: "en",
-                postalCode: "400202",
-                state: "Mah"),
-            billingEmail: "markweins@gmail.com",
-            billingName: "Test mark",
-            billingPhone: mobileNo),
-        currency: currency,
-        env: "dev",
-        failureUrl: "https://www.bing.com",
-        key: clientKey,
-        source: "mobile",
-        merchantOrderId: orderId,
-        orderDetails: [
-          OrderDetails(
-              id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
-        ],
-        pmtChannel: paymentChannel,
-        pmtMethod: paymentMethod,
-        shippingDetails: ShippingDetails(
-            shippingAddress: ShippingAddress(
-                city: "VND",
-                countryCode: "VN",
-                line1: "address",
-                line2: "address_2",
-                locale: "en",
-                postalCode: "400202",
-                state: "Mah"),
-            shippingEmail: "markweins@gmail.com",
-            shippingName: "Test mark",
-            shippingPhone: mobileNo),
-        signatureHash: signatureHash,
-        successUrl: "https://www.google.com",
-        environment: environment,
-        transactionType:transactionType);
+        CheckoutWithDirectBankTransferRequest(
+            amount: 50010,
+            billingDetails: BillingDetails(
+                billingAddress: BillingAddress(
+                    city: "VND",
+                    countryCode: "VN",
+                    line1: "address",
+                    line2: "address_2",
+                    locale: "en",
+                    postalCode: "400202",
+                    state: "Mah"),
+                billingEmail: "markweins@gmail.com",
+                billingName: "Test mark",
+                billingPhone: mobileNo),
+            currency: currency,
+            env: "dev",
+            failureUrl: "https://www.bing.com",
+            key: clientKey,
+            source: "mobile",
+            merchantOrderId: orderId,
+            orderDetails: [
+              OrderDetails(
+                  id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
+            ],
+            pmtChannel: paymentChannel,
+            pmtMethod: paymentMethod,
+            shippingDetails: ShippingDetails(
+                shippingAddress: ShippingAddress(
+                    city: "VND",
+                    countryCode: "VN",
+                    line1: "address",
+                    line2: "address_2",
+                    locale: "en",
+                    postalCode: "400202",
+                    state: "Mah"),
+                shippingEmail: "markweins@gmail.com",
+                shippingName: "Test mark",
+                shippingPhone: mobileNo),
+            signatureHash: signatureHash,
+            successUrl: "https://www.google.com",
+            environment: environment,
+            transactionType: transactionType);
     return request;
   }
 
@@ -330,7 +331,7 @@ class Requests {
         successUrl: "https://www.google.com",
         bankDetails: gbppBankDetails(),
         environment: environment,
-        transactionType:transactionType);
+        transactionType: transactionType);
     return request;
   }
 
