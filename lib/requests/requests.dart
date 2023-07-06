@@ -23,6 +23,7 @@ class Requests {
   final currency = THB;
   final paymentChannel = "OMISE";
   final paymentMethod = "OMISE_CREDIT_CARD";
+  final customerUUID = "c60005e1-164c-46fa-b7a1-fbee11543493";
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();

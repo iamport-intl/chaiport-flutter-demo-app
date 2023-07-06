@@ -2,13 +2,21 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
+import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/dto/requests/add_customer_request.dart';
+import 'package:chaipay_flutter_package/dto/requests/delete_card_request.dart';
+import 'package:chaipay_flutter_package/dto/responses/add_card_for_customer_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/add_customer_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/bank_list_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/chanex_token_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/creditcard_details_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/direct_bank_transfer_details_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/generic_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/get_customer_data_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/get_otp_response.dart';
+import 'package:chaipay_flutter_package/dto/responses/list_cards_for_customer_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/payment_method_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/with_tokenization_response.dart';
 import 'package:chaipay_flutter_package/dto/responses/without_tokenization_response.dart';
@@ -27,6 +35,7 @@ class _HomeState extends State<Home> {
   Requests requests = Requests();
   late StreamSubscription _intentData;
   SignatureHash hash = SignatureHash();
+  RandomStringsGeneration randomString = RandomStringsGeneration();
 
   @override
   void initState() {
@@ -78,6 +87,35 @@ class _HomeState extends State<Home> {
       final json = jsonEncode(response);
       print('CHAI_DBTDetails-> $json');
     });
+
+    chai.setAddCustomerListener(callback: (AddCustomerResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_AddCustomer-> $json');
+    });
+
+    chai.setGetCustomerDataListener(
+        callback: (GetCustomerDataResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_GetCustomer-> $json');
+    });
+
+    chai.setListCardsForCustomerListener(
+        callback: (ListCardsForCustomerResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_ListCustomer-> $json');
+    });
+
+    chai.setAddCardForCustomerListener(
+        callback: (AddCardForCustomerResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_AddCard-> $json');
+    });
+
+    chai.setDeleteCardForCustomerListener(callback: (GenericResponse response) {
+      final json = jsonEncode(response);
+      print('CHAI_DeleteCard-> $json');
+    });
+
     _intentData =
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
@@ -112,24 +150,47 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   // chai.getOTP(requests.mobileNo);
                   // chai.checkoutUsingWeb(requests.getJWTToken(),
-                  //     requests.clientKey, requests.getRequestBody(), chai);
+                  //     requests.clientKey, requests.getRequestBody());
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
                   // chai.checkoutWithTokenization(
                   //     requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest(), chai);
-                  chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
-                      requests.getChanexTokenRequest(),requests.getJWTToken());
+                  //     requests.getWithoutTokenizationRequest());
+                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
+                  //     requests.getChanexTokenRequest(), requests.getJWTToken());
                   // chai.checkoutUsingDirectBankTransfer(
-                  //     requests.getCheckoutWithDirectBankTransferRequest(),
-                  //     chai);
+                  //     requests.getCheckoutWithDirectBankTransferRequest());
                   // chai.checkoutUsingInstallation(
-                  //     requests.getCheckoutWithInstallationRequest(), chai);
+                  //     requests.getCheckoutWithInstallationRequest());
                   // chai.getBankList(
                   //     requests.paymentChannel, requests.getBankListRequest());
                   // chai.getDBTDetails(requests.clientKey);
+                  // chai.addCustomer(
+                  //     requests.getJWTToken(),
+                  //     requests.clientKey,
+                  //     AddCustomerRequest(
+                  //         name: "Aagam",
+                  //         customerRef: randomString.getRandomString(10),
+                  //         emailAddress:
+                  //             randomString.getRandomString(10) + "@gmail.com",
+                  //         phoneNumber: requests.mobileNo));
+                  // chai.getCustomer(requests.getJWTToken(), requests.clientKey,
+                  //     requests.customerUUID);
+                  // chai.addCardForCustomer(
+                  //     requests.customerUUID,
+                  //     requests.getJWTToken(),
+                  //     requests.clientKey,
+                  //     requests.getChanexTokenRequest());
+                  // chai.listCardsForCustomer(requests.customerUUID,
+                  //     requests.getJWTToken(), requests.clientKey);
+                  chai.deleteCardForCustomer(
+                      requests.customerUUID,
+                      requests.getJWTToken(),
+                      requests.clientKey,
+                      DeleteCardRequest(
+                          token: "735eaf72a0a14965aced3e1f9a339b0b"));
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
