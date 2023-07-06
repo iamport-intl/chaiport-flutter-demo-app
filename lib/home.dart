@@ -154,8 +154,8 @@ class _HomeState extends State<Home> {
                   // chai.getPaymentMethods(requests.clientKey);
                   // chai.getSavedCards(
                   //     "", requests.clientKey, requests.mobileNo, "217910");
-                  // chai.checkoutWithTokenization(
-                  //     requests.getTokenizationRequest());
+                  chai.checkoutWithTokenization(
+                      requests.getTokenizationRequest());
                   // chai.checkoutWithoutTokenization(
                   //     requests.getWithoutTokenizationRequest());
                   // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
@@ -185,12 +185,12 @@ class _HomeState extends State<Home> {
                   //     requests.getChanexTokenRequest());
                   // chai.listCardsForCustomer(requests.customerUUID,
                   //     requests.getJWTToken(), requests.clientKey);
-                  chai.deleteCardForCustomer(
-                      requests.customerUUID,
-                      requests.getJWTToken(),
-                      requests.clientKey,
-                      DeleteCardRequest(
-                          token: "735eaf72a0a14965aced3e1f9a339b0b"));
+                  // chai.deleteCardForCustomer(
+                  //     requests.customerUUID,
+                  //     requests.getJWTToken(),
+                  //     requests.clientKey,
+                  //     DeleteCardRequest(
+                  //         token: "735eaf72a0a14965aced3e1f9a339b0b"));
                 },
                 child: const Padding(
                   padding: EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0),
