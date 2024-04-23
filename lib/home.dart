@@ -4,7 +4,7 @@ import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
-import 'package:chaipay_flutter_package/chaiport_services/chaiport_impl.dart';
+import 'package:chaipay_flutter_package/chaiport_services/portone_impl.dart';
 import 'package:chaipay_flutter_package/dto/requests/add_customer_request.dart';
 import 'package:chaipay_flutter_package/dto/requests/delete_card_request.dart';
 import 'package:chaipay_flutter_package/dto/responses/add_card_for_customer_response.dart';
@@ -32,7 +32,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late ChaiPortImpl chai;
+  late PortOneImpl portone;
   Requests requests = Requests();
   late StreamSubscription _intentData;
   SignatureHash hash = SignatureHash();
@@ -42,87 +42,90 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    chai = ChaiPortImpl(
+    portone = PortOneImpl(
         context, requests.environment, false, requests.devEnvironment);
 
-    chai.setPaymentStatusListener(
+    portone.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
       final json = jsonEncode(paymentStatus);
       print('CHAI_PaymentStatus-> $json');
       navigateToResult(paymentStatus);
     });
-    chai.setOtpListener(callback: (GetOtpResponse response) {
+    portone.setOtpListener(callback: (GetOtpResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setPaymentMethodsListener(callback: (PaymentMethodResponse response) {
+    portone.setPaymentMethodsListener(
+        callback: (PaymentMethodResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setSavedCardsListener(callback: (CreditCardDetailsResponse response) {
+    portone.setSavedCardsListener(
+        callback: (CreditCardDetailsResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setCheckoutWithTokenizationListener(
+    portone.setCheckoutWithTokenizationListener(
         callback: (WithTokenizationResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setCheckoutWithoutTokenizationListener(
+    portone.setCheckoutWithoutTokenizationListener(
         callback: (WithoutTokenizationResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
+    portone.setTokenCallBackListener(callback: (ChanexTokenResponse response) {
       final json = jsonEncode(response);
       print('CHAI_Response-> $response--> $json');
     });
-    chai.setPaymentLinkListener(callback: (String paymentLink) {
+    portone.setPaymentLinkListener(callback: (String paymentLink) {
       print('CHAI_PaymentLink-> $paymentLink');
     });
-    chai.setBankListListener(callback: (BankListResponse response) {
+    portone.setBankListListener(callback: (BankListResponse response) {
       final json = jsonEncode(response);
       print('CHAI_BankList-> $json');
     });
-    chai.setDBTDetailsListener(callback: (DBTDetailsResponse response) {
+    portone.setDBTDetailsListener(callback: (DBTDetailsResponse response) {
       final json = jsonEncode(response);
       print('CHAI_DBTDetails-> $json');
     });
 
-    chai.setAddCustomerListener(callback: (AddCustomerResponse response) {
+    portone.setAddCustomerListener(callback: (AddCustomerResponse response) {
       final json = jsonEncode(response);
       print('CHAI_AddCustomer-> $json');
     });
 
-    chai.setGetCustomerDataListener(
+    portone.setGetCustomerDataListener(
         callback: (GetCustomerDataResponse response) {
       final json = jsonEncode(response);
       print('CHAI_GetCustomer-> $json');
     });
 
-    chai.setListCardsForCustomerListener(
+    portone.setListCardsForCustomerListener(
         callback: (ListCardsForCustomerResponse response) {
       final json = jsonEncode(response);
       print('CHAI_ListCustomer-> $json');
     });
 
-    chai.setAddCardForCustomerListener(
+    portone.setAddCardForCustomerListener(
         callback: (AddCardForCustomerResponse response) {
       final json = jsonEncode(response);
       print('CHAI_AddCard-> $json');
     });
 
-    chai.setDeleteCardForCustomerListener(callback: (GenericResponse response) {
+    portone.setDeleteCardForCustomerListener(
+        callback: (GenericResponse response) {
       final json = jsonEncode(response);
       print('CHAI_DeleteCard-> $json');
     });
 
-    chai.setCaptureTransactionListener(callback: (GenericResponse response) {
+    portone.setCaptureTransactionListener(callback: (GenericResponse response) {
       final json = jsonEncode(response);
       print('CHAI_CapturedTransaction-> $json');
     });
 
-    chai.setRoutesListListener(callback: (RoutesListResponse response) {
+    portone.setRoutesListListener(callback: (RoutesListResponse response) {
       final json = jsonEncode(response);
       print('CHAI_RoutesList-> $json');
     });
@@ -131,7 +134,7 @@ class _HomeState extends State<Home> {
         ReceiveSharingIntent.getTextStream().listen((String deeplink) {
       setState(() {
         print('CHAI_DeepLink-> $deeplink');
-        chai.processPaymentStatus(deeplink, requests.environment);
+        portone.processPaymentStatus(deeplink, requests.environment);
       });
     });
   }
@@ -159,52 +162,55 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // chai.getOTP(requests.mobileNo);
-                  // chai.checkoutUsingWeb(requests.getJWTToken(),
-                  //     requests.clientKey, requests.getRequestBody());
-                  // chai.getPaymentMethods(requests.clientKey);
-                  // chai.getSavedCards(
-                  //     "", requests.clientKey, requests.mobileNo, "217910");
-                  // chai.checkoutWithTokenization(
-                  //     requests.getTokenizationRequest());
-                  // chai.checkoutWithoutTokenization(
-                  //     requests.getWithoutTokenizationRequest());
-                  // chai.checkoutUsingNewCard(requests.getTokenizationRequest(),
-                  //     requests.getChanexTokenRequest(), requests.getJWTToken());
-                  // chai.checkoutUsingDirectBankTransfer(
-                  //     requests.getCheckoutWithDirectBankTransferRequest());
-                  // chai.checkoutUsingInstallation(
-                  //     requests.getCheckoutWithInstallationRequest());
-                  // chai.getBankList(
-                  //     requests.paymentChannel, requests.getBankListRequest());
-                  // chai.getDBTDetails(requests.clientKey);
-                  // chai.addCustomer(
-                  //     requests.getJWTToken(),
-                  //     requests.clientKey,
-                  //     AddCustomerRequest(
-                  //         name: "Aagam",
-                  //         customerRef: randomString.getRandomString(10),
-                  //         emailAddress:
-                  //             randomString.getRandomString(10) + "@gmail.com",
-                  //         phoneNumber: requests.mobileNo));
-                  // chai.getCustomer(requests.getJWTToken(), requests.clientKey,
-                  //     requests.customerUUID);
-                  // chai.addCardForCustomer(
-                  //     requests.customerUUID,
-                  //     requests.getJWTToken(),
-                  //     requests.clientKey,
-                  //     requests.getChanexTokenRequest());
-                  // chai.listCardsForCustomer(requests.customerUUID,
-                  //     requests.getJWTToken(), requests.clientKey);
-                  // chai.deleteCardForCustomer(
-                  //     requests.customerUUID,
-                  //     requests.getJWTToken(),
-                  //     requests.clientKey,
-                  //     DeleteCardRequest(
-                  //         token: "735eaf72a0a14965aced3e1f9a339b0b"));
-                  // chai.captureTransaction("2SDCUiBEv34oqeIdEDv1pftGeeY",
-                  //     requests.getJWTToken(), requests.clientKey);
-                  chai.getRoutesList(
+                  portone.getOTP(requests.mobileNo);
+                  portone.checkoutUsingWeb(requests.getJWTToken(),
+                      requests.clientKey, requests.getRequestBody());
+                  portone.getPaymentMethods(
+                      requests.clientKey, requests.currency);
+                  portone.getSavedCards(
+                      "", requests.clientKey, requests.mobileNo, "217910");
+                  portone.checkoutWithTokenization(
+                      requests.getTokenizationRequest());
+                  portone.checkoutWithoutTokenization(
+                      requests.getWithoutTokenizationRequest());
+                  portone.checkoutUsingNewCard(
+                      requests.getTokenizationRequest(),
+                      requests.getChanexTokenRequest(),
+                      requests.getJWTToken());
+                  portone.checkoutUsingDirectBankTransfer(
+                      requests.getCheckoutWithDirectBankTransferRequest());
+                  portone.checkoutUsingInstallation(
+                      requests.getCheckoutWithInstallationRequest());
+                  portone.getBankList(
+                      requests.paymentChannel, requests.getBankListRequest());
+                  portone.getDBTDetails(requests.clientKey);
+                  portone.addCustomer(
+                      requests.getJWTToken(),
+                      requests.clientKey,
+                      AddCustomerRequest(
+                          name: "Aagam",
+                          customerRef: randomString.getRandomString(10),
+                          emailAddress:
+                              randomString.getRandomString(10) + "@gmail.com",
+                          phoneNumber: requests.mobileNo));
+                  portone.getCustomer(requests.getJWTToken(),
+                      requests.clientKey, requests.customerUUID);
+                  portone.addCardForCustomer(
+                      requests.customerUUID,
+                      requests.getJWTToken(),
+                      requests.clientKey,
+                      requests.getChanexTokenRequest());
+                  portone.listCardsForCustomer(requests.customerUUID,
+                      requests.getJWTToken(), requests.clientKey);
+                  portone.deleteCardForCustomer(
+                      requests.customerUUID,
+                      requests.getJWTToken(),
+                      requests.clientKey,
+                      DeleteCardRequest(
+                          token: "735eaf72a0a14965aced3e1f9a339b0b"));
+                  portone.captureTransaction("2SDCUiBEv34oqeIdEDv1pftGeeY",
+                      requests.getJWTToken(), requests.clientKey);
+                  portone.getRoutesList(
                       requests.clientKey, requests.getJWTToken());
                 },
                 child: const Padding(
