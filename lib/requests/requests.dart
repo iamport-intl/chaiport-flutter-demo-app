@@ -1,19 +1,21 @@
-import 'package:chai_flutter_demo_app/constants/constants.dart';
 import 'package:chai_flutter_demo_app/utils/jwt_token_generation.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
 import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
-import 'package:chaipay_flutter_package/constants/constants.dart';
-import 'package:chaipay_flutter_package/dto/requests/bank_list_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/billing_details.dart';
-import 'package:chaipay_flutter_package/dto/requests/chanex_token_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/checkout_with_direct_bank_transfer_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/checkout_with_installation_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/merchant_details.dart';
-import 'package:chaipay_flutter_package/dto/requests/order_details.dart';
-import 'package:chaipay_flutter_package/dto/requests/shipping_details.dart';
-import 'package:chaipay_flutter_package/dto/requests/web_checkout_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/with_tokenization_request.dart';
-import 'package:chaipay_flutter_package/dto/requests/without_tokenization_request.dart';
+import 'package:portone_flutter_package/constants/constants.dart';
+import 'package:portone_flutter_package/dto/requests/bank_list_request.dart';
+import 'package:portone_flutter_package/dto/requests/billing_details.dart';
+import 'package:portone_flutter_package/dto/requests/chanex_token_request.dart';
+import 'package:portone_flutter_package/dto/requests/checkout_global_request.dart';
+import 'package:portone_flutter_package/dto/requests/checkout_with_direct_bank_transfer_request.dart';
+import 'package:portone_flutter_package/dto/requests/checkout_with_installation_request.dart';
+import 'package:portone_flutter_package/dto/requests/merchant_details.dart';
+import 'package:portone_flutter_package/dto/requests/order_details.dart';
+import 'package:portone_flutter_package/dto/requests/shipping_details.dart';
+import 'package:portone_flutter_package/dto/requests/web_checkout_request.dart';
+import 'package:portone_flutter_package/dto/requests/with_tokenization_request.dart';
+import 'package:portone_flutter_package/dto/requests/without_tokenization_request.dart';
+
+import '../constants/constants.dart';
 
 class Requests {
   final devEnvironment = DEV;
@@ -21,11 +23,10 @@ class Requests {
   final secretKey = SECRET_KEY_Dev3;
   final mobileNo = "+919913379694";
   final environment = SANDBOX;
-  final currency = THB;
-  final paymentChannel = "OMISE";
-  final paymentMethod = "OMISE_CREDIT_CARD";
-  final customerUUID = "c60005e1-164c-46fa-b7a1-fbee11543493";
-  final transactionType = "PREAUTH"; // PURCHASE || PREAUTH
+  final currency = VND;
+  final paymentChannel = "APPOTAPAY";
+  final paymentMethod = "APPOTAPAY_CREDIT_CARD";
+  final customerUUID = "";
 
   SignatureHash hash = SignatureHash();
   JwtTokenGeneration jwt = JwtTokenGeneration();
@@ -35,17 +36,68 @@ class Requests {
     return "Bearer " + jwt.getJWTToken();
   }
 
+  GlobalCheckoutRequest getGlobalCheckoutRequest() {
+    String orderId = randomString.getRandomString(6);
+    String signatureHash = hash.getSignatureHash(
+        amount: "50010",
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        orderId: orderId,
+        clientKey: clientKey,
+        successUrl: "https://www.google.com");
+    GlobalCheckoutRequest globalCheckoutRequest = GlobalCheckoutRequest(
+        amount: 50010,
+        billingDetails: BillingDetails(
+            billingAddress: BillingAddress(
+                city: "TH",
+                countryCode: "TH",
+                locale: "en",
+                line1: "address",
+                line2: "address_2",
+                postalCode: "400202",
+                state: "Mah"),
+            billingEmail: "markweins@gmail.com",
+            billingName: "Test mark",
+            billingPhone: mobileNo),
+        shippingDetails: ShippingDetails(
+            shippingAddress: ShippingAddress(
+                city: "TH",
+                countryCode: "TH",
+                locale: "en",
+                line1: "address",
+                line2: "address_2",
+                postalCode: "400202",
+                state: "Mah"),
+            shippingEmail: "markweins@gmail.com",
+            shippingName: "Test mark",
+            shippingPhone: mobileNo),
+        currency: currency,
+        failureUrl: "https://www.bing.com",
+        portOneKey: clientKey,
+        merchantOrderId: orderId,
+        orderDetails: [
+          OrderDetails(
+              id: "knb", name: "kim nguyen bao", price: 1000, quantity: 1)
+        ],
+        signatureHash: signatureHash,
+        successUrl: "https://www.google.com",
+        source: "mobile",
+        redirectUrl: "portone://checkout",
+        environment: environment);
+    return globalCheckoutRequest;
+  }
+
   WebCheckoutRequest getRequestBody() {
     String orderId = randomString.getRandomString(6);
     String signatureHash = hash.getSignatureHash(
-        amount: "19010.2",
+        amount: "19010",
         currency: currency,
         failureUrl: "https://dev-checkout.chaipay.io/failure.html",
         orderId: orderId,
         clientKey: clientKey,
         successUrl: "https://dev-checkout.chaipay.io/success.html");
     WebCheckoutRequest webCheckoutRequest = WebCheckoutRequest(
-        amount: 19010.2,
+        amount: 19010,
         billingDetails: BillingDetails(
             billingAddress: BillingAddress(
                 city: "VND",
@@ -78,9 +130,9 @@ class Requests {
         merchantOrderId: orderId,
         orderDetails: <OrderDetails>[
           OrderDetails(
-              id: "knb", name: "kim nguyen bao", price: 19010.2, quantity: 1)
+              id: "knb", name: "kim nguyen bao", price: 19010, quantity: 1)
         ],
-        mobileRedirectUrl: "chaipay://checkout",
+        mobileRedirectUrl: "portone://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: ShippingAddress(
                 city: "VND",
@@ -154,13 +206,10 @@ class Requests {
         ],
         pmtChannel: paymentChannel,
         pmtMethod: paymentMethod,
-        redirectUrl: "chaipay://checkout",
+        redirectUrl: "portone://checkout",
         signatureHash: signatureHash,
-        source: "mobile",
         successUrl: "https://www.google.com",
-        environment: environment,
-        transactionType: transactionType,
-        routingParams: RoutingParams(type: "failover", routeRef: null));
+        environment: environment);
     return tokenizationRequest;
   }
 
@@ -198,7 +247,7 @@ class Requests {
         ],
         pmtChannel: paymentChannel,
         pmtMethod: paymentMethod,
-        redirectUrl: "chaipay://checkout",
+        redirectUrl: "portone://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: ShippingAddress(
                 city: "VND",
@@ -214,8 +263,7 @@ class Requests {
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
         environment: environment,
-        source: "mobile",
-        transactionType: transactionType);
+        source: "mobile");
     return tokenizationRequest;
   }
 
@@ -275,8 +323,7 @@ class Requests {
             shippingPhone: mobileNo),
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
-        environment: environment,
-        transactionType: transactionType);
+        environment: environment);
     return request;
   }
 
@@ -315,7 +362,7 @@ class Requests {
         ],
         pmtChannel: paymentChannel,
         pmtMethod: paymentMethod,
-        redirectUrl: "chaipay://checkout",
+        redirectUrl: "portone://checkout",
         shippingDetails: ShippingDetails(
             shippingAddress: ShippingAddress(
                 city: "VND",
@@ -331,8 +378,7 @@ class Requests {
         signatureHash: signatureHash,
         successUrl: "https://www.google.com",
         bankDetails: gbppBankDetails(),
-        environment: environment,
-        transactionType: transactionType);
+        environment: environment);
     return request;
   }
 
@@ -362,7 +408,7 @@ class Requests {
         bankCode: "installment_bay",
         bankName: "Krungsri",
         isMerchantSponsored: false,
-        installmentPeriod: InstallmentPeriod(month: 4, interest: 0.8));
+        installmentPeriod: InstallmentPeriod(month: 4, interest: 8));
     return bankDetails;
   }
 
@@ -380,12 +426,12 @@ class Requests {
 
   ChanexTokenRequest omiseCreditCard() {
     ChanexTokenRequest card = ChanexTokenRequest(
-        cardNumber: "4242424242424242",
+        cardNumber: "4000000000000002",
         cardType: "Visa",
         cardholderName: "NGUYEN VAN A",
-        serviceCode: "123",
-        expirationYear: "2025",
-        expirationMonth: "05",
+        serviceCode: "737",
+        expirationYear: "2022",
+        expirationMonth: "11",
         saveCard: true);
     return card;
   }
@@ -398,18 +444,6 @@ class Requests {
         serviceCode: "123",
         expirationYear: "2030",
         expirationMonth: "01",
-        saveCard: true);
-    return card;
-  }
-
-  ChanexTokenRequest gbppDebiCard() {
-    ChanexTokenRequest card = ChanexTokenRequest(
-        cardNumber: "4535017710535741",
-        cardType: "Visa",
-        cardholderName: "NGUYEN VAN A",
-        serviceCode: "184",
-        expirationYear: "2028",
-        expirationMonth: "05",
         saveCard: true);
     return card;
   }
