@@ -21,7 +21,7 @@ class Requests {
   final devEnvironment = DEV;
   final clientKey = CLIENT_KEY_Dev3;
   final secretKey = SECRET_KEY_Dev3;
-  final mobileNo = "+919913379694";
+  final mobileNo = "+848959893980";
   final environment = SANDBOX;
   final currency = VND;
   final paymentChannel = "APPOTAPAY";

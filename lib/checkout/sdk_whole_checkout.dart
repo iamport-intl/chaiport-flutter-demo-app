@@ -85,98 +85,20 @@ class _SdkWholeCheckoutState extends State<SdkWholeCheckout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-            color: Colors.grey[100],
-            child: Column(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: CheckoutScreen(
-                        checkoutRequest: requests.getGlobalCheckoutRequest(),
-                        portone: portone),
-                  ),
-                ),
-                BottomNavigation(
-                  portone: portone,
-                  checkoutRequest: widget.checkoutRequest,
-                ),
-              ],
-            )),
-      ),
-    );
-  }
-}
-
-class BottomNavigation extends StatelessWidget {
-  BottomNavigation(
-      {Key? key, required this.portone, required this.checkoutRequest})
-      : super(key: key);
-  PortOneImpl portone;
-  GlobalCheckoutRequest checkoutRequest;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30))),
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () {
-              showModalBottomSheet<dynamic>(
-                context: context,
-                isScrollControlled: true,
-                shape: const RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(25))),
-                builder: (context) => SavedCardsBottomSheet(
-                    portone: portone,
-                    totalAmount: 20000.00,
-                    checkoutRequest: checkoutRequest,
-                    savedCards: null),
-              );
-            },
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Image.asset("assets/images/successful-card-payment.png"),
-              const Text(
-                "Get Saved Cards Now",
-                style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16),
-              ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.deepOrange,
-                size: 20,
-              )
-            ]),
-          ),
-          const Divider(
-            thickness: 1,
-          ),
-          const Row(
+      appBar: AppBar(backgroundColor:Colors.grey[100] ,),
+      body: Container(
+          color: Colors.grey[100],
+          child: Column(
             children: [
-              Text("Total"),
-              Icon(Icons.keyboard_arrow_up),
-              Spacer(),
-              Text(
-                "20,000.00THB",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-              )
+              Expanded(
+                child: CheckoutScreen(
+                  checkoutRequest: requests.getGlobalCheckoutRequest(),
+                  portone: portone,
+                  jwtToken: requests.getJWTToken(),
+                ),
+              ),
             ],
-          ),
-          const SizedBox(
-            height: 5,
-          )
-        ],
-      ),
+          )),
     );
   }
 }

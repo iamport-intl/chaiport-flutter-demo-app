@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:chai_flutter_demo_app/checkout/app_elements_checkout.dart';
-import 'package:chai_flutter_demo_app/checkout/sdk_elements_checkout.dart';
 import 'package:chai_flutter_demo_app/requests/requests.dart';
 import 'package:chai_flutter_demo_app/result.dart';
 import 'package:chai_flutter_demo_app/utils/random_strings_generation.dart';
@@ -9,8 +8,6 @@ import 'package:chai_flutter_demo_app/utils/signature_hash_generation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portone_flutter_package/checkout_theme.dart';
 import 'package:portone_flutter_package/portone_services/portone_impl.dart';
-import 'package:portone_flutter_package/dto/requests/add_customer_request.dart';
-import 'package:portone_flutter_package/dto/requests/delete_card_request.dart';
 import 'package:portone_flutter_package/dto/responses/add_card_for_customer_response.dart';
 import 'package:portone_flutter_package/dto/responses/add_customer_response.dart';
 import 'package:portone_flutter_package/dto/responses/bank_list_response.dart';
@@ -26,8 +23,10 @@ import 'package:portone_flutter_package/dto/responses/routes_list_response.dart'
 import 'package:portone_flutter_package/dto/responses/with_tokenization_response.dart';
 import 'package:portone_flutter_package/dto/responses/without_tokenization_response.dart';
 import 'package:flutter/material.dart';
-import 'package:portone_flutter_package/screens/checkout/checkout_screen.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+
+import 'checkout/sdk_elements_checkout.dart';
+import 'checkout/sdk_whole_checkout.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -48,8 +47,8 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    portone = PortOneImpl(
-        context, requests.environment, checkoutTheme, false, requests.devEnvironment);
+    portone = PortOneImpl(context, requests.environment, checkoutTheme, false,
+        requests.devEnvironment);
 
     portone.setPaymentStatusListener(
         callback: (Map<String, dynamic> paymentStatus) {
@@ -199,11 +198,17 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         // Navigator.pushNamed(
                         //     context, CheckoutElements.routeName);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => CheckoutElements(
+                        //           checkoutRequest:
+                        //               requests.getGlobalCheckoutRequest())),
+                        // );
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CheckoutScreen(
-                                  portone: portone,
+                              builder: (context) => SdkWholeCheckout(
                                   checkoutRequest:
                                       requests.getGlobalCheckoutRequest())),
                         );
