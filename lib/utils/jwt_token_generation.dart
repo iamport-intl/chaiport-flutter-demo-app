@@ -8,7 +8,7 @@ class JwtTokenGeneration {
 
     final claimSet = JwtClaim(
         issuedAt: DateTime.now(),
-        expiry: DateTime.now().add(const Duration(seconds: 100)),
+        expiry: DateTime.now().add(const Duration(seconds: 1000)),
         issuer: "PORTONE",
         subject: requests.clientKey,
         otherClaims: <String, dynamic>{
